@@ -1,0 +1,103 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.163.1/containers/go
+{
+  "name": "Go",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "args": {
+      // Update the VARIANT arg to pick a version of Go: 1, 1.16, 1.15
+      "VARIANT": "1.16"
+    }
+  },
+  "runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+  ],
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    "[go]": {
+      "editor.insertSpaces": false,
+      "editor.tabSize": 4
+    },
+    "debug.console.fontFamily": "'SF Mono', Monaco, Menlo, Consolas, 'Courier New', monospace",
+    "debug.console.fontSize": 12,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderSideBySide": false,
+    "editor.cursorSmoothCaretAnimation": true,
+    "editor.cursorStyle": "block",
+    "editor.fontFamily": "'SF Mono', Monaco, Menlo, Consolas, 'Courier New', monospace",
+    "editor.fontLigatures": false,
+    "editor.fontSize": 12,
+    "editor.fontWeight": "500",
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": false,
+    "editor.minimap.enabled": false,
+    "editor.renderWhitespace": "all",
+    "editor.rulers": [
+      120
+    ],
+    "editor.selectionClipboard": false,
+    "editor.suggestSelection": "first",
+    "editor.wordWrap": "on",
+    "files.autoSave": "afterDelay",
+    "files.eol": "\n",
+    "git.autofetch": true,
+    "git.decorations.enabled": true,
+    "go.gopath": "/go",
+    "go.toolsManagement.autoUpdate": true,
+    "go.useLanguageServer": true,
+    "markdown.preview.fontSize": 12,
+    "problems.decorations.enabled": true,
+    "telemetry.enableCrashReporter": false,
+    "telemetry.enableTelemetry": false,
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "underline",
+    "terminal.integrated.fontSize": 12,
+    "terminal.integrated.fontWeight": "500",
+    "terminal.integrated.shell.linux": "/bin/zsh",
+    "todo-tree.general.tags": [
+      "BUG",
+      "HACK",
+      "FIXME",
+      "TODO",
+      "XXX",
+      "[ ]",
+      "[x]"
+    ],
+    "todo-tree.regex.regex": "(//|#|<!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    "todo-tree.tree.showScanModeButton": false,
+    "workbench.colorTheme": "GitHub Light",
+    "workbench.editor.showIcons": false,
+    "workbench.iconTheme": "vscode-icontheme-nomo-dark-macos",
+    "workbench.sideBar.location": "left",
+    "workbench.startupEditor": "newUntitledFile"
+  },
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "eamodio.gitlens",
+    "editorconfig.editorconfig",
+    "gaulomatic.vscode-icontheme-nomo-dark-macos",
+    "github.github-vscode-theme",
+    "golang.Go",
+    "gruntfuggly.todo-tree",
+    "natqe.reload",
+    "psioniq.psi-header"
+  ],
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [
+  //   8080
+  // ],
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "go version",
+  // Use 'portsAttributes' to set default properties for specific forwarded ports.
+  // "portsAttributes": {
+  //   "8080": {
+  //     "label": "port-8080",
+  //     "onAutoForward": "notify"
+  //   }
+  // },
+  // Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+  "remoteUser": "vscode"
+}
