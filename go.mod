@@ -1,3 +1,3 @@
-module github.com/works-on-my-machine/go-vscode
+module github.com/ghokun/climan-runner
 
 go 1.16

@@ -1,7 +1,14 @@
 package main
 
-import "fmt"
+import (
+	"log"
+
+	"github.com/ghokun/climan-runner/pkg/tool"
+)
 
 func main() {
-	fmt.Println("Hello world")
+	err := tool.GenerateTools()
+	if err != nil {
+		log.Fatal(err)
+	}
 }

@@ -1,5 +1,0 @@
-package tool
-
-func init() {
-	
-}
