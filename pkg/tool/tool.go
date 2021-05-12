@@ -24,3 +24,7 @@ func GenerateTools() (err error) {
 	err = ioutil.WriteFile("./docs/tools.json", data, 0644)
 	return err
 }
+
+func GenerateEachTool() (err error) {
+	return nil
+}
