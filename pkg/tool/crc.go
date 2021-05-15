@@ -38,7 +38,7 @@ func getCrc() (crc Tool, err error) {
 		}
 		return Tool{
 			Name:        "crc",
-			Description: "Code Ready Containers - Local single node Openshift",
+			Description: "Local single node Openshift",
 			Supports: platform.CalculateSupportedPlatforms(
 				[]string{"darwin_amd64",
 					"linux_amd64",

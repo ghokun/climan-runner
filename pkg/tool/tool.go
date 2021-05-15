@@ -54,3 +54,25 @@ func getLatestReleaseFromGithub(owner string, repo string, name string, desc str
 	}
 	return t, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
 }
+
+func getLatestTagFromGithub(owner string, repo string, name string, desc string, platforms ...string) (t Tool, err error) {
+	tags, response, err := client.Repositories.ListTags(context.Background(), owner, repo, &github.ListOptions{
+		Page:    0,
+		PerPage: 1,
+	})
+	if err != nil {
+		return t, err
+	}
+	if len(tags) < 0 {
+		return t, errors.Unwrap(fmt.Errorf("no tag found for %q", name))
+	}
+	if response.StatusCode == 200 {
+		return Tool{
+			Name:        name,
+			Description: desc,
+			Supports:    platform.CalculateSupportedPlatforms(platforms),
+			Latest:      *tags[0].Name,
+		}, nil
+	}
+	return t, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
+}

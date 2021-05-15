@@ -30,7 +30,7 @@ func getKubectl() (kubectl Tool, err error) {
 		}
 		return Tool{
 			Name:        "kubectl",
-			Description: "Kubernetes command line interface",
+			Description: "Kubernetes command line tool",
 			Supports: platform.CalculateSupportedPlatforms(
 				[]string{"darwin_amd64",
 					"darwin_arm64",
