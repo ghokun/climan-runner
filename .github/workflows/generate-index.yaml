@@ -18,6 +18,7 @@ jobs:
           mv climan-linux-amd64 climan
           chmod +x climan
           echo '```' > ./docs/index.md; ./climan list >> ./docs/index.md; echo '```' >> ./docs/index.md
+          rm climan
       - name: Commit changes
         run: |
           git config --global user.name 'ghokun'

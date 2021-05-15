@@ -19,6 +19,14 @@ type Tool struct {
 }
 
 type ToolVersion struct {
+	Version   string                  `json:"version,omitempty"`
+	Platforms map[string]ToolDownload `json:"platforms,omitempty"`
+}
+
+type ToolDownload struct {
+	Url      string `json:"url,omitempty"`
+	Checksum string `json:"checksum,omitempty"`
+	Alg      string `json:"alg,omitempty"`
 }
 
 var (
@@ -33,10 +41,6 @@ func GenerateTools() (err error) {
 	}
 	err = ioutil.WriteFile("./docs/tools.json", data, 0644)
 	return err
-}
-
-func GenerateEachTool() (err error) {
-	return nil
 }
 
 func getLatestReleaseFromGithub(owner string, repo string, name string, desc string, platforms ...string) (t Tool, err error) {
@@ -75,4 +79,18 @@ func getLatestTagFromGithub(owner string, repo string, name string, desc string,
 		}, nil
 	}
 	return t, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
+}
+
+func getReleasesFromGithub(owner string, repo string, name string) (releases []*github.RepositoryRelease, err error) {
+	releases, response, err := client.Repositories.ListReleases(context.Background(), owner, repo, &github.ListOptions{
+		Page:    0,
+		PerPage: 2000,
+	})
+	if err != nil {
+		return releases, err
+	}
+	if response.StatusCode == 200 {
+		return releases, nil
+	}
+	return releases, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
 }

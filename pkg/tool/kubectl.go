@@ -1,10 +1,13 @@
 package tool
 
 import (
+	"encoding/json"
 	"errors"
 	"io"
+	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
 )
@@ -15,6 +18,22 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, kubectl)
+	toolVersions, err := getKubectlVersions()
+	if err != nil {
+		log.Fatal(err)
+	}
+	for _, toolVersion := range toolVersions {
+		data, err := json.Marshal(toolVersion)
+		if err != nil {
+			log.Fatal(err)
+		}
+		os.Mkdir("./docs/"+kubectl.Name, os.ModePerm)
+		location := "./docs/" + kubectl.Name + "/" + toolVersion.Version + ".json"
+		err = ioutil.WriteFile(location, data, 0644)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}
 }
 
 func getKubectl() (kubectl Tool, err error) {
@@ -46,4 +65,58 @@ func getKubectl() (kubectl Tool, err error) {
 		}, nil
 	}
 	return kubectl, errors.New("error while fetcing latest version of kubectl")
+}
+
+func getKubectlVersions() (toolVersions []ToolVersion, err error) {
+	releases, err := getReleasesFromGithub("kubernetes", "kubernetes", "kubectl")
+	if err != nil {
+		return nil, err
+	}
+	for _, release := range releases {
+		toolVersion, err := generateKubectlVersion(*release.TagName)
+		if err != nil {
+			return nil, err
+		}
+		toolVersions = append(toolVersions, toolVersion)
+	}
+	return toolVersions, nil
+}
+
+func generateKubectlVersion(version string) (toolVersion ToolVersion, err error) {
+	baseUrl := "https://storage.googleapis.com/kubernetes-release/release/" + version
+	return ToolVersion{
+		Version: version,
+		Platforms: map[string]ToolDownload{
+			"darwin_amd64": {
+				Url: baseUrl + "/bin/darwin/amd64/kubectl",
+			},
+			"darwin_arm64": {
+				Url: baseUrl + "/bin/darwin/arm64/kubectl",
+			},
+			"linux_386": {
+				Url: baseUrl + "/bin/linux/386/kubectl",
+			},
+			"linux_amd64": {
+				Url: baseUrl + "/bin/linux/amd64/kubectl",
+			},
+			"linux_arm": {
+				Url: baseUrl + "/bin/linux/arm/kubectl",
+			},
+			"linux_arm64": {
+				Url: baseUrl + "/bin/linux/arm64/kubectl",
+			},
+			"linux_ppc64le": {
+				Url: baseUrl + "/bin/linux/ppc64le/kubectl",
+			},
+			"linux_s390x": {
+				Url: baseUrl + "/bin/linux/s390x/kubectl",
+			},
+			"windows_386": {
+				Url: baseUrl + "/bin/windows/386/kubectl",
+			},
+			"windows_amd64": {
+				Url: baseUrl + "/bin/windows/amd64/kubectl",
+			},
+		},
+	}, nil
 }
