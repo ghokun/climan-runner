@@ -22,7 +22,9 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	var versions []string
 	for _, toolVersion := range toolVersions {
+		versions = append(versions, toolVersion.Version)
 		data, err := json.Marshal(toolVersion)
 		if err != nil {
 			log.Fatal(err)
@@ -33,6 +35,14 @@ func init() {
 		if err != nil {
 			log.Fatal(err)
 		}
+	}
+	allVersions, err := json.Marshal(versions)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ioutil.WriteFile("./docs/"+kubectl.Name+"/versions.json", allVersions, 0644)
+	if err != nil {
+		log.Fatal(err)
 	}
 }
 
@@ -112,10 +122,10 @@ func generateKubectlVersion(version string) (toolVersion ToolVersion, err error)
 				Url: baseUrl + "/bin/linux/s390x/kubectl",
 			},
 			"windows_386": {
-				Url: baseUrl + "/bin/windows/386/kubectl",
+				Url: baseUrl + "/bin/windows/386/kubectl.exe",
 			},
 			"windows_amd64": {
-				Url: baseUrl + "/bin/windows/amd64/kubectl",
+				Url: baseUrl + "/bin/windows/amd64/kubectl.exe",
 			},
 		},
 	}, nil
