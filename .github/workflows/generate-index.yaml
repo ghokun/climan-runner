@@ -1,14 +1,9 @@
-name: Generate Tools
+name: Generate Index
 on:
   schedule:
-  - cron: "0 * * * *"
-  push:
-    branches:
-      - main
-    paths-ignore:
-      - './docs*'
+  - cron: "15 * * * *"
 jobs:
-  generate:
+  generate-index:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Go
@@ -17,9 +12,12 @@ jobs:
           go-version: 1.16
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Generate tools
+      - name: Generate index
         run: |
-          go run main.go
+          curl -OL https://github.com/ghokun/climan/releases/download/v0.0.3/climan-linux-amd64
+          mv climan-linux-amd64 climan
+          chmod +x climan
+          echo '```' > ./docs/index.md; ./climan list >> ./docs/index.md; echo '```' >> ./docs/index.md
       - name: Commit changes
         run: |
           git config --global user.name 'ghokun'

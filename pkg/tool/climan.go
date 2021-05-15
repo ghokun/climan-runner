@@ -1,11 +1,13 @@
 package tool
 
+import "log"
+
 func init() {
-	// climan, err := getCliman()
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
-	// Tools[climan.Name] = climan
+	climan, err := getCliman()
+	if err != nil {
+		log.Fatal(err)
+	}
+	Tools = append(Tools, climan)
 }
 
 func getCliman() (climan Tool, err error) {
