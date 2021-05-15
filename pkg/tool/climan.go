@@ -12,7 +12,6 @@ func init() {
 
 func getCliman() (climan Tool, err error) {
 	return getLatestReleaseFromGithub("ghokun", "climan", "climan", "Cloud tools cli manager", "darwin_amd64",
-		"darwin_amd64",
 		"darwin_arm64",
 		"linux_386",
 		"linux_amd64",
