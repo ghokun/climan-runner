@@ -9,7 +9,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Tools[kind.Name] = kind
+	Tools = append(Tools, kind)
 }
 
 func getKind() (kind Tool, err error) {

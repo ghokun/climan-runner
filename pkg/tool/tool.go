@@ -22,7 +22,7 @@ type ToolVersion struct {
 }
 
 var (
-	Tools  = map[string]Tool{}
+	Tools  = []Tool{}
 	client = github.NewClient(nil)
 )
 

@@ -9,7 +9,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Tools[helm.Name] = helm
+	Tools = append(Tools, helm)
 }
 
 func getHelm() (helm Tool, err error) {

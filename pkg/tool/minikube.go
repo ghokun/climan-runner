@@ -9,7 +9,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Tools[minikube.Name] = minikube
+	Tools = append(Tools, minikube)
 }
 
 func getMinikube() (minikube Tool, err error) {

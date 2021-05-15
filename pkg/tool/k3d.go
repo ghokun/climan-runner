@@ -9,7 +9,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Tools[k3d.Name] = k3d
+	Tools = append(Tools, k3d)
 }
 
 func getK3d() (k3d Tool, err error) {

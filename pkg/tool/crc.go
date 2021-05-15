@@ -14,7 +14,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Tools[crc.Name] = crc
+	Tools = append(Tools, crc)
 }
 
 type crcData struct {

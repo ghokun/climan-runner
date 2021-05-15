@@ -9,7 +9,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Tools[tkn.Name] = tkn
+	Tools = append(Tools, tkn)
 }
 
 func getTkn() (tkn Tool, err error) {

@@ -9,7 +9,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Tools[argocd.Name] = argocd
+	Tools = append(Tools, argocd)
 }
 
 func getArgocd() (argocd Tool, err error) {

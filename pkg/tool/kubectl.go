@@ -14,7 +14,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	Tools[kubectl.Name] = kubectl
+	Tools = append(Tools, kubectl)
 }
 
 func getKubectl() (kubectl Tool, err error) {
