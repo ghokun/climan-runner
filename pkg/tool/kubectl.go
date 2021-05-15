@@ -7,7 +7,6 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
 )
@@ -18,29 +17,42 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, kubectl)
+	// Generate versions.json
 	toolVersions, err := getKubectlVersions()
 	if err != nil {
 		log.Fatal(err)
 	}
-	var versions []string
-	for _, toolVersion := range toolVersions {
-		versions = append(versions, toolVersion.Version)
-		data, err := json.Marshal(toolVersion)
-		if err != nil {
-			log.Fatal(err)
-		}
-		os.Mkdir("./docs/"+kubectl.Name, os.ModePerm)
-		location := "./docs/" + kubectl.Name + "/" + toolVersion.Version + ".json"
-		err = ioutil.WriteFile(location, data, 0644)
-		if err != nil {
-			log.Fatal(err)
-		}
-	}
-	allVersions, err := json.Marshal(versions)
+	allVersions, err := json.Marshal(toolVersions)
 	if err != nil {
 		log.Fatal(err)
 	}
 	err = ioutil.WriteFile("./docs/"+kubectl.Name+"/versions.json", allVersions, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Generate template.json
+	template, err := generateKubectlVersion("{{.Version}}")
+	if err != nil {
+		log.Fatal(err)
+	}
+	templateData, err := json.Marshal(template)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ioutil.WriteFile("./docs/"+kubectl.Name+"/template.json", templateData, 0644)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Generate latest.json
+	latest, err := generateKubectlVersion(kubectl.Latest)
+	if err != nil {
+		log.Fatal(err)
+	}
+	latestData, err := json.Marshal(latest)
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = ioutil.WriteFile("./docs/"+kubectl.Name+"/latest.json", latestData, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -77,17 +89,13 @@ func getKubectl() (kubectl Tool, err error) {
 	return kubectl, errors.New("error while fetcing latest version of kubectl")
 }
 
-func getKubectlVersions() (toolVersions []ToolVersion, err error) {
+func getKubectlVersions() (toolVersions []string, err error) {
 	releases, err := getReleasesFromGithub("kubernetes", "kubernetes", "kubectl")
 	if err != nil {
 		return nil, err
 	}
 	for _, release := range releases {
-		toolVersion, err := generateKubectlVersion(*release.TagName)
-		if err != nil {
-			return nil, err
-		}
-		toolVersions = append(toolVersions, toolVersion)
+		toolVersions = append(toolVersions, *release.TagName)
 	}
 	return toolVersions, nil
 }
