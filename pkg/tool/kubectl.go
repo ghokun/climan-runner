@@ -5,6 +5,8 @@ import (
 	"io"
 	"log"
 	"net/http"
+
+	"github.com/ghokun/climan-runner/pkg/platform"
 )
 
 func init() {
@@ -29,8 +31,18 @@ func getKubectl() (kubectl Tool, err error) {
 		return Tool{
 			Name:        "kubectl",
 			Description: "Kubernetes command line interface",
-			Supports:    2047,
-			Latest:      string(bodyBytes),
+			Supports: platform.CalculateSupportedPlatforms(
+				[]string{"darwin_amd64",
+					"darwin_arm64",
+					"linux_386",
+					"linux_amd64",
+					"linux_arm",
+					"linux_arm64",
+					"linux_ppc64le",
+					"linux_s390x",
+					"windows_386",
+					"windows_amd64"}),
+			Latest: string(bodyBytes),
 		}, nil
 	}
 	return kubectl, errors.New("error while fetcing latest version of kubectl")

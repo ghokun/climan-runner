@@ -5,7 +5,7 @@ import (
 	"runtime"
 )
 
-var platforms = map[string]int{
+var Platforms = map[string]int{
 	"darwin_amd64":  1,
 	"darwin_arm64":  2,
 	"linux_386":     4,
@@ -21,8 +21,18 @@ var platforms = map[string]int{
 
 func CurrentPlatform() (platform int, err error) {
 	current := runtime.GOOS + "_" + runtime.GOARCH
-	if platform, ok := platforms[current]; ok {
+	if platform, ok := Platforms[current]; ok {
 		return platform, nil
 	}
 	return platform, errors.New("unsupported platform")
+}
+
+func CalculateSupportedPlatforms(platforms []string) int {
+	supports := 0
+	for _, platform := range platforms {
+		if number, ok := Platforms[platform]; ok {
+			supports += number
+		}
+	}
+	return supports
 }
