@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
 )
@@ -17,6 +18,8 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, kubectl)
+	folder := "./docs/" + kubectl.Name
+	os.Mkdir(folder, os.ModePerm)
 	// Generate versions.json
 	toolVersions, err := getKubectlVersions()
 	if err != nil {
@@ -26,7 +29,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = ioutil.WriteFile("./docs/"+kubectl.Name+"/versions.json", allVersions, 0644)
+	err = ioutil.WriteFile(folder+"/versions.json", allVersions, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -39,7 +42,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = ioutil.WriteFile("./docs/"+kubectl.Name+"/template.json", templateData, 0644)
+	err = ioutil.WriteFile(folder+"/template.json", templateData, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -52,7 +55,7 @@ func init() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = ioutil.WriteFile("./docs/"+kubectl.Name+"/latest.json", latestData, 0644)
+	err = ioutil.WriteFile(folder+"/latest.json", latestData, 0644)
 	if err != nil {
 		log.Fatal(err)
 	}
