@@ -36,3 +36,11 @@ func CalculateSupportedPlatforms(platforms []string) int {
 	}
 	return supports
 }
+
+func CheckToolSupport(supports int) (result bool, err error) {
+	platform, err := CurrentPlatform()
+	if err != nil {
+		return false, err
+	}
+	return platform == platform&supports, nil
+}
