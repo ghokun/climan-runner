@@ -1,7 +1,8 @@
 ## climan <a class="github-button" href="https://github.com/ghokun/climan" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star ghokun/climan on GitHub">Star</a> <a class="github-button" href="https://github.com/ghokun/climan/issues" data-icon="octicon-issue-opened" data-size="large" data-show-count="true" aria-label="Issue ghokun/climan on GitHub">Issue</a>
 `climan` is command line tool manager for cloud native technologies.
 
-<script async defer src="https://buttons.github.io/buttons.js"></script>
+<script
+async defer src="https://buttons.github.io/buttons.js"></script>
 
 <table>
     <thead>
