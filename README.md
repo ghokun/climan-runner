@@ -1,11 +1,13 @@
-# go-vscode
+# climan-runner
 
-This is a template repository for go development.
+This repository generates links for [climan.dev](https://climan.dev).
 
-## Usage
-1. Click `Use this template` button.
-2. Replace `go-vscode` with your project name in files listed below:
-  - go.mod
-  - .vscode/launch.json
-
+### Generated links
+```
+https://climan.dev
+https://climan.dev/tools.json
+https://climan.dev/{{TOOL}}/versions.json
+https://climan.dev/{{TOOL}}/template.json
+https://climan.dev/{{TOOL}}/latest.json
+```
 

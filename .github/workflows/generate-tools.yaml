@@ -1,7 +1,7 @@
 name: Generate Tools
 on:
   schedule:
-  - cron: "30 */6 * * *"
+  - cron: "30 * * * *"
   push:
     branches:
       - main

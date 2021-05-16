@@ -103,34 +103,54 @@ func generateKubectlVersion(version string) (toolVersion ToolVersion) {
 		Version: version,
 		Platforms: map[string]ToolDownload{
 			"darwin_amd64": {
-				Url: baseUrl + "/bin/darwin/amd64/kubectl",
+				Url:      baseUrl + "/bin/darwin/amd64/kubectl",
+				Checksum: baseUrl + "/bin/darwin/amd64/kubectl.sha256",
+				Alg:      "sha256",
 			},
 			"darwin_arm64": {
-				Url: baseUrl + "/bin/darwin/arm64/kubectl",
+				Url:      baseUrl + "/bin/darwin/arm64/kubectl",
+				Checksum: baseUrl + "/bin/darwin/arm64/kubectl.sha256",
+				Alg:      "sha256",
 			},
 			"linux_386": {
-				Url: baseUrl + "/bin/linux/386/kubectl",
+				Url:      baseUrl + "/bin/linux/386/kubectl",
+				Checksum: baseUrl + "/bin/linux/386/kubectl.sha256",
+				Alg:      "sha256",
 			},
 			"linux_amd64": {
-				Url: baseUrl + "/bin/linux/amd64/kubectl",
+				Url:      baseUrl + "/bin/linux/amd64/kubectl",
+				Checksum: baseUrl + "/bin/linux/amd64/kubectl.sha256",
+				Alg:      "sha256",
 			},
 			"linux_arm": {
-				Url: baseUrl + "/bin/linux/arm/kubectl",
+				Url:      baseUrl + "/bin/linux/arm/kubectl",
+				Checksum: baseUrl + "/bin/linux/arm/kubectl.sha256",
+				Alg:      "sha256",
 			},
 			"linux_arm64": {
-				Url: baseUrl + "/bin/linux/arm64/kubectl",
+				Url:      baseUrl + "/bin/linux/arm64/kubectl",
+				Checksum: baseUrl + "/bin/linux/arm64/kubectl.sha256",
+				Alg:      "sha256",
 			},
 			"linux_ppc64le": {
-				Url: baseUrl + "/bin/linux/ppc64le/kubectl",
+				Url:      baseUrl + "/bin/linux/ppc64le/kubectl",
+				Checksum: baseUrl + "/bin/linux/ppc64le/kubectl.sha256",
+				Alg:      "sha256",
 			},
 			"linux_s390x": {
-				Url: baseUrl + "/bin/linux/s390x/kubectl",
+				Url:      baseUrl + "/bin/linux/s390x/kubectl",
+				Checksum: baseUrl + "/bin/linux/s390x/kubectl.sha256",
+				Alg:      "sha256",
 			},
 			"windows_386": {
-				Url: baseUrl + "/bin/windows/386/kubectl.exe",
+				Url:      baseUrl + "/bin/windows/386/kubectl.exe",
+				Checksum: baseUrl + "/bin/windows/386/kubectl.exe.sha256",
+				Alg:      "sha256",
 			},
 			"windows_amd64": {
-				Url: baseUrl + "/bin/windows/amd64/kubectl.exe",
+				Url:      baseUrl + "/bin/windows/amd64/kubectl.exe",
+				Checksum: baseUrl + "/bin/windows/amd64/kubectl.exe.sha256",
+				Alg:      "sha256",
 			},
 		},
 	}
