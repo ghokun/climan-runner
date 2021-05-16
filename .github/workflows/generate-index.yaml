@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - './docs*'
+      - docs/*
 jobs:
   generate-index:
     runs-on: ubuntu-latest
