@@ -16,7 +16,7 @@ var Platforms = map[string]int{
 	"linux_s390x":   128,
 	"windows_386":   256,
 	"windows_amd64": 512,
-	"windows_arm64": 1024,
+	"windows_arm": 1024,
 }
 
 func CurrentPlatform() (platform int, err error) {
