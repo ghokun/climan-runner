@@ -1,4 +1,5 @@
-<button type="button" class="btn btn-{{include.button_class}} active">{{include.button_name}}</button>
+{% include download.html button_name="Download" button_class="primary" %}
+
 ```
 █▀▀ █░░ █ █▀▄▀█ ▄▀█ █▄░█  Version : 0.0.3
 █▄▄ █▄▄ █ █░▀░█ █▀█ █░▀█  Commit  : 25becb0417d553badf0dcceebae5436528917660
@@ -6,7 +7,7 @@
 NAME      LATEST  DESCRIPTION                                      
 argocd    v2.0.1  Declarative continuous deployment for Kubernetes 
 arkade    0.7.15  Open Source Kubernetes Marketplace               
-climan    v0.0.3  Cloud tools cli manager                          
+climan    v0.0.4  Cloud tools cli manager                          
 crc       1.26.0  Local single node Openshift                      
 helm      v3.5.4  The Kubernetes Package Manager                   
 k3d       v4.4.3  k3s in Docker                                    
