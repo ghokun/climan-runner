@@ -83,8 +83,8 @@ func getLatestTagFromGithub(owner string, repo string, name string, desc string,
 
 func getReleasesFromGithub(owner string, repo string, name string) (releases []*github.RepositoryRelease, err error) {
 	releases, response, err := client.Repositories.ListReleases(context.Background(), owner, repo, &github.ListOptions{
-		Page:    0,
-		PerPage: 1000,
+		Page:    1,
+		PerPage: 100,
 	})
 	if err != nil {
 		return releases, err

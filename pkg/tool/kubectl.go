@@ -34,10 +34,7 @@ func init() {
 		log.Fatal(err)
 	}
 	// Generate template.json
-	template, err := generateKubectlVersion("{{.Version}}")
-	if err != nil {
-		log.Fatal(err)
-	}
+	template := generateKubectlVersion("{{.Version}}")
 	templateData, err := json.Marshal(template)
 	if err != nil {
 		log.Fatal(err)
@@ -47,10 +44,7 @@ func init() {
 		log.Fatal(err)
 	}
 	// Generate latest.json
-	latest, err := generateKubectlVersion(kubectl.Latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	latest := generateKubectlVersion(kubectl.Latest)
 	latestData, err := json.Marshal(latest)
 	if err != nil {
 		log.Fatal(err)
@@ -103,7 +97,7 @@ func getKubectlVersions() (toolVersions []string, err error) {
 	return toolVersions, nil
 }
 
-func generateKubectlVersion(version string) (toolVersion ToolVersion, err error) {
+func generateKubectlVersion(version string) (toolVersion ToolVersion) {
 	baseUrl := "https://storage.googleapis.com/kubernetes-release/release/" + version
 	return ToolVersion{
 		Version: version,
@@ -139,5 +133,5 @@ func generateKubectlVersion(version string) (toolVersion ToolVersion, err error)
 				Url: baseUrl + "/bin/windows/amd64/kubectl.exe",
 			},
 		},
-	}, nil
+	}
 }
