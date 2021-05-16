@@ -1,13 +1,12 @@
 package tool
 
 import (
-	"encoding/json"
 	"errors"
 	"io"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
 )
@@ -18,38 +17,27 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, kubectl)
-	folder := "./docs/" + kubectl.Name
+	// Generate kubectl specific directory
+	folder := filepath.Join(".", "docs", kubectl.Name)
 	os.Mkdir(folder, os.ModePerm)
 	// Generate versions.json
 	toolVersions, err := getKubectlVersions()
 	if err != nil {
 		log.Fatal(err)
 	}
-	allVersions, err := json.Marshal(toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = ioutil.WriteFile(folder+"/versions.json", allVersions, 0644)
+	err = writeJson(folder, "versions.json", toolVersions)
 	if err != nil {
 		log.Fatal(err)
 	}
 	// Generate template.json
 	template := generateKubectlVersion("{{.Version}}")
-	templateData, err := json.Marshal(template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = ioutil.WriteFile(folder+"/template.json", templateData, 0644)
+	err = writeJson(folder, "template.json", template)
 	if err != nil {
 		log.Fatal(err)
 	}
 	// Generate latest.json
 	latest := generateKubectlVersion(kubectl.Latest)
-	latestData, err := json.Marshal(latest)
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = ioutil.WriteFile(folder+"/latest.json", latestData, 0644)
+	err = writeJson(folder, "latest.json", latest)
 	if err != nil {
 		log.Fatal(err)
 	}

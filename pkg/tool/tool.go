@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"path/filepath"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
 	"github.com/google/go-github/v35/github"
@@ -39,7 +40,8 @@ func GenerateTools() (err error) {
 	if err != nil {
 		return err
 	}
-	err = ioutil.WriteFile("./docs/tools.json", data, 0644)
+	toolsFile := filepath.Join(".", "docs", "tools.json")
+	err = ioutil.WriteFile(toolsFile, data, 0644)
 	return err
 }
 
@@ -93,4 +95,16 @@ func getReleasesFromGithub(owner string, repo string, name string) (releases []*
 		return releases, nil
 	}
 	return releases, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
+}
+
+func writeJson(folder string, filename string, data interface{}) (err error) {
+	bytes, err := json.Marshal(data)
+	if err != nil {
+		return err
+	}
+	err = ioutil.WriteFile(filepath.Join(folder, filename), bytes, 0644)
+	if err != nil {
+		return err
+	}
+	return nil
 }

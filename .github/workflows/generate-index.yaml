@@ -17,7 +17,7 @@ jobs:
           curl -OL https://github.com/ghokun/climan/releases/download/v0.0.3/climan-linux-amd64
           mv climan-linux-amd64 climan
           chmod +x climan
-          cat ./docs/download.html > ./docs/index.md
+          cat ./docs/download.md > ./docs/index.md
           echo '```' >> ./docs/index.md; ./climan list >> ./docs/index.md; echo '```' >> ./docs/index.md
           rm climan
       - name: Commit changes
