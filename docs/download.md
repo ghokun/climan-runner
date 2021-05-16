@@ -19,7 +19,7 @@ export PATH=$HOME/.climan/bin:$PATH # add to PATH
 ./climan install climan
 
 # Uninstall
-# export PATH=$HOME/.climan/bin:$PATH < remove from  PATH
+# export PATH=$HOME/.climan/bin:$PATH < remove from PATH
 rm -rf ~/.climan
 ```
 ## commands
