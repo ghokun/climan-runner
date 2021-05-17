@@ -1,3 +1,4 @@
 name: climan
 title: null
 markdown: GFM
+theme: jekyll-theme-primer
