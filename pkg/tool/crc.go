@@ -48,3 +48,5 @@ func getCrc() (crc Tool, err error) {
 	}
 	return crc, errors.New("error while fetcing latest version of crc")
 }
+
+// TODO versions

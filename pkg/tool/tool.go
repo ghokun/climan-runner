@@ -97,6 +97,20 @@ func getReleasesFromGithub(owner string, repo string, name string) (releases []*
 	return releases, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
 }
 
+func getTagsFromGithub(owner string, repo string, name string) (releases []*github.RepositoryTag, err error) {
+	tags, response, err := client.Repositories.ListTags(context.Background(), owner, repo, &github.ListOptions{
+		Page:    0,
+		PerPage: 100,
+	})
+	if err != nil {
+		return tags, err
+	}
+	if response.StatusCode == 200 {
+		return tags, nil
+	}
+	return tags, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
+}
+
 func writeJson(folder string, filename string, data interface{}) (err error) {
 	bytes, err := json.Marshal(data)
 	if err != nil {

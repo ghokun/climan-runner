@@ -51,3 +51,6 @@ package tool
 // 	}
 // 	return tools, errors.New("error while fetcing latest version of openshift tools")
 // }
+
+// TODO all
+// TODO versions
