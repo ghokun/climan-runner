@@ -5,6 +5,9 @@ import (
 	"errors"
 	"log"
 	"net/http"
+	"os"
+	"path/filepath"
+	"strings"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
 )
@@ -15,6 +18,30 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, crc)
+	// Generate crc specific directory
+	folder := filepath.Join(".", "docs", crc.Name)
+	os.Mkdir(folder, os.ModePerm)
+	// Generate versions.json
+	toolVersions, err := getCrcVersions()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = writeJson(folder, "versions.json", toolVersions)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Generate template.json
+	template := generateCrcVersion("{{.Version}}")
+	err = writeJson(folder, "template.json", template)
+	if err != nil {
+		log.Fatal(err)
+	}
+	// Generate latest.json
+	latest := generateCrcVersion(crc.Latest)
+	err = writeJson(folder, "latest.json", latest)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 type crcData struct {
@@ -49,4 +76,38 @@ func getCrc() (crc Tool, err error) {
 	return crc, errors.New("error while fetcing latest version of crc")
 }
 
-// TODO versions
+func getCrcVersions() (toolVersions []string, err error) {
+	releases, err := getReleasesFromGithub("code-ready", "crc", "crc")
+	if err != nil {
+		return nil, err
+	}
+	for _, release := range releases {
+		// Versions starting with 0 are not hosted on openshift mirror
+		if !strings.HasPrefix(*release.TagName, "0.") {
+			toolVersions = append(toolVersions, *release.TagName)
+		}
+	}
+	return toolVersions, nil
+}
+
+func generateCrcVersion(version string) (toolVersion ToolVersion) {
+	baseUrl := "https://mirror.openshift.com/pub/openshift-v4/clients/crc/" + strings.TrimPrefix(version, "v")
+	return ToolVersion{
+		Version: version,
+		Platforms: map[string]ToolDownload{
+			"darwin_amd64": {
+				Url:      baseUrl + "/crc-macos-amd64.tar.xz",
+				Checksum: baseUrl + "/sha256sum.txt",
+				Alg:      "sha256",
+			},
+			"linux_amd64": {
+				Url:      baseUrl + "/crc-linux-amd64.tar.xz",
+				Checksum: baseUrl + "/sha256sum.txt",
+				Alg:      "sha256"},
+			"windows_amd64": {
+				Url:      baseUrl + "/crc-windows-amd64.zip",
+				Checksum: baseUrl + "/sha256sum.txt",
+				Alg:      "sha256"},
+		},
+	}
+}
