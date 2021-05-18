@@ -122,7 +122,7 @@ istioctl  1.10.0        Cli for Istio service mesh
 k3d       v4.4.3        k3s in Docker                                          
 k3sup     0.11.0        Bootstrap Kubernetes with k3s                          
 kamel     v1.4.0        Cli for Apacke Camel-K                                 
-kind      v0.10.0       Kubernetes in Docker                                   
+kind      v0.11.0       Kubernetes in Docker                                   
 kn        v0.22.0       Knative cli                                            
 kubectl   v1.21.1       Kubernetes command line tool                           
 kustomize v4.1.2        Customization of kubernetes YAML configurations        
