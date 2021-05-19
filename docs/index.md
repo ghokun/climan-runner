@@ -124,13 +124,13 @@ k3sup     0.11.0        Bootstrap Kubernetes with k3s
 kam       v0.0.32       GitOps Application Manager                             
 kamel     v1.4.0        Cli for Apacke Camel-K                                 
 kind      v0.11.0       Kubernetes in Docker                                   
-kn        v0.22.0       Knative cli                                            
+kn        v0.23.0       Knative cli                                            
 kubectl   v1.21.1       Kubernetes command line tool                           
 kustomize v4.1.2        Customization of kubernetes YAML configurations        
 linkerd2  stable-2.10.2 Ultralight, security-first service mesh for Kubernetes 
 minikube  v1.20.0       Run Kubernetes locally                                 
 odo       v2.2.0        Developer-focused cli for OpenShift                    
 plumber   v0.22.4       Cli for messaging systems                              
-pscale    v0.35.0       Cli for PlanetScale Database                           
+pscale    v0.36.0       Cli for PlanetScale Database                           
 tkn       v0.18.0       Cli for interacting with Tekton                        
 ```
