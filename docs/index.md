@@ -131,6 +131,6 @@ linkerd2  stable-2.10.2 Ultralight, security-first service mesh for Kubernetes
 minikube  v1.20.0       Run Kubernetes locally                                 
 odo       v2.2.0        Developer-focused cli for OpenShift                    
 plumber   v0.22.4       Cli for messaging systems                              
-pscale    v0.36.0       Cli for PlanetScale Database                           
+pscale    v0.37.0       Cli for PlanetScale Database                           
 tkn       v0.18.0       Cli for interacting with Tekton                        
 ```
