@@ -1,3 +1,5 @@
 site_name: climan
 theme:
   name: material
+nav:
+  - Home: index.md
