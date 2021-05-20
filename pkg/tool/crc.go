@@ -75,7 +75,7 @@ func getCrc() (crc Tool, err error) {
 	}
 	return crc, errors.New("error while fetcing latest version of crc")
 }
-
+// TODO get from mirror openshift
 func getCrcVersions() (toolVersions []string, err error) {
 	releases, err := getReleasesFromGithub("code-ready", "crc", "crc")
 	if err != nil {

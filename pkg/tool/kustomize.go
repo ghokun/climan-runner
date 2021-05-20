@@ -82,6 +82,7 @@ func getKustomize() (kustomize Tool, err error) {
 	return kustomize, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
 }
 
+// TODO fix getting versions
 func getKustomizeVersions() (toolVersions []string, err error) {
 	releases, err := getReleasesFromGithub("kubernetes-sigs", "kustomize", "kustomize")
 	if err != nil {
