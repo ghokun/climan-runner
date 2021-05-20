@@ -1,2 +1,2 @@
 #!/bin/bash
-echo 'It works'
+echo $0 is going to be installed
