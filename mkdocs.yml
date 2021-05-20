@@ -1,5 +1,22 @@
 site_name: climan
 theme:
   name: material
+  icon:
+    logo: octicons/file-binary-24
+    repo: fontawesome/brands/github
+  palette:
+    - scheme: default
+      primary: indigo
+      toggle:
+        icon: octicons/moon-16
+        name: Switch to dark mode
+    - scheme: slate
+      primary: red
+      toggle:
+        icon: octicons/sun-16
+        name: Switch to light mode
 nav:
   - Home: index.md
+repo_name: ghokun/climan
+repo_url: https://github.com/ghokun/climan
+edit_uri: https://github.com/ghokun/climan-runner/edit/main/docs/
