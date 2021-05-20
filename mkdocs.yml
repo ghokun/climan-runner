@@ -29,3 +29,14 @@ nav:
 repo_name: ghokun/climan
 repo_url: https://github.com/ghokun/climan
 edit_uri: https://github.com/ghokun/climan-runner/edit/main/docs/
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/ghokun
+      name: ghokun on Github
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/ghokun
+      name: ghokun on Twitter
+
+copyright: ghokun - MIT Licence
