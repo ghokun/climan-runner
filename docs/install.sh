@@ -1,2 +1,2 @@
 #!/bin/bash
-echo $0 is going to be installed
+echo $2 is going to be installed
