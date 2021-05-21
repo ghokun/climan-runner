@@ -2,8 +2,6 @@ package tool
 
 import (
 	"log"
-	"os"
-	"path/filepath"
 )
 
 func init() {
@@ -12,30 +10,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, climan)
-	// Generate climan specific directory
-	folder := filepath.Join(".", "docs", climan.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getClimanVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generateClimanVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generateClimanVersion(climan.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("climan", climan.Latest, getClimanVersions, generateClimanVersion)
 }
 
 func getCliman() (climan Tool, err error) {

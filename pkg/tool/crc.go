@@ -5,8 +5,6 @@ import (
 	"errors"
 	"log"
 	"net/http"
-	"os"
-	"path/filepath"
 	"strings"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
@@ -18,30 +16,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, crc)
-	// Generate crc specific directory
-	folder := filepath.Join(".", "docs", crc.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getCrcVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generateCrcVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generateCrcVersion(crc.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("crc", crc.Latest, getCrcVersions, generateCrcVersion)
 }
 
 type crcData struct {
@@ -75,6 +50,7 @@ func getCrc() (crc Tool, err error) {
 	}
 	return crc, errors.New("error while fetcing latest version of crc")
 }
+
 // TODO get from mirror openshift
 func getCrcVersions() (toolVersions []string, err error) {
 	releases, err := getReleasesFromGithub("code-ready", "crc", "crc")

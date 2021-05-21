@@ -2,8 +2,6 @@ package tool
 
 import (
 	"log"
-	"os"
-	"path/filepath"
 )
 
 func init() {
@@ -12,30 +10,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, odo)
-	// Generate odo specific directory
-	folder := filepath.Join(".", "docs", odo.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getOdoVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generateOdoVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generateOdoVersion(odo.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("odo", odo.Latest, getOdoVersions, generateOdoVersion)
 }
 
 func getOdo() (odo Tool, err error) {

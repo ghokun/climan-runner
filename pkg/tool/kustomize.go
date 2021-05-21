@@ -5,8 +5,6 @@ import (
 	"errors"
 	"fmt"
 	"log"
-	"os"
-	"path/filepath"
 	"strings"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
@@ -19,30 +17,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, kustomize)
-	// Generate kustomize specific directory
-	folder := filepath.Join(".", "docs", kustomize.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getKustomizeVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generateKustomizeVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generateKustomizeVersion(kustomize.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("kustomize", kustomize.Latest, getKustomizeVersions, generateKustomizeVersion)
 }
 
 func getKustomize() (kustomize Tool, err error) {
@@ -50,8 +25,7 @@ func getKustomize() (kustomize Tool, err error) {
 	owner := "kubernetes-sigs"
 	repo := "kustomize"
 	name := "kustomize"
-	desc := "Customization of kubernetes YAML configurations"
-
+	
 	tags, response, err := client.Repositories.ListTags(context.Background(), owner, repo, &github.ListOptions{
 		Page:    0,
 		PerPage: 1000,
@@ -68,7 +42,7 @@ func getKustomize() (kustomize Tool, err error) {
 			if strings.HasPrefix(*tag.Name, "kustomize") {
 				return Tool{
 					Name:        name,
-					Description: desc,
+					Description: "Customization of kubernetes YAML configurations",
 					Supports: platform.CalculateSupportedPlatforms(
 						[]string{"darwin_amd64",
 							"linux_amd64",

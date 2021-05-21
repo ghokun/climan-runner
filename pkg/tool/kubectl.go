@@ -5,8 +5,6 @@ import (
 	"io"
 	"log"
 	"net/http"
-	"os"
-	"path/filepath"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
 )
@@ -17,30 +15,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, kubectl)
-	// Generate kubectl specific directory
-	folder := filepath.Join(".", "docs", kubectl.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getKubectlVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generateKubectlVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generateKubectlVersion(kubectl.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("kubectl", kubectl.Latest, getKubectlVersions, generateKubectlVersion)
 }
 
 func getKubectl() (kubectl Tool, err error) {

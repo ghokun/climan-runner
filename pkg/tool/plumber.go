@@ -2,8 +2,6 @@ package tool
 
 import (
 	"log"
-	"os"
-	"path/filepath"
 )
 
 func init() {
@@ -12,30 +10,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, plumber)
-	// Generate plumber specific directory
-	folder := filepath.Join(".", "docs", plumber.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getPlumberVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generatePlumberVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generatePlumberVersion(plumber.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("plumber", plumber.Latest, getPlumberVersions, generatePlumberVersion)
 }
 
 func getPlumber() (plumber Tool, err error) {

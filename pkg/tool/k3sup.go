@@ -2,8 +2,6 @@ package tool
 
 import (
 	"log"
-	"os"
-	"path/filepath"
 )
 
 func init() {
@@ -12,30 +10,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, k3sup)
-	// Generate k3sup specific directory
-	folder := filepath.Join(".", "docs", k3sup.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getK3supVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generateK3supVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generateK3supVersion(k3sup.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("k3sup", k3sup.Latest, getK3supVersions, generateK3supVersion)
 }
 
 func getK3sup() (k3sup Tool, err error) {

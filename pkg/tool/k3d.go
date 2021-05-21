@@ -2,8 +2,6 @@ package tool
 
 import (
 	"log"
-	"os"
-	"path/filepath"
 )
 
 func init() {
@@ -12,30 +10,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, k3d)
-	// Generate k3d specific directory
-	folder := filepath.Join(".", "docs", k3d.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getK3dVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generateK3dVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generateK3dVersion(k3d.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("k3d", k3d.Latest, getK3dVersions, generateK3dVersion)
 }
 
 func getK3d() (k3d Tool, err error) {

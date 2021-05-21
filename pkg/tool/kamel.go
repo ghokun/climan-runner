@@ -2,8 +2,6 @@ package tool
 
 import (
 	"log"
-	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -13,30 +11,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, kamel)
-	// Generate kamel specific directory
-	folder := filepath.Join(".", "docs", kamel.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getKamelVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generateKamelVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generateKamelVersion(kamel.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("kamel", kamel.Latest, getKamelVersions, generateKamelVersion)
 }
 
 func getKamel() (kamel Tool, err error) {

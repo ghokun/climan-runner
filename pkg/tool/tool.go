@@ -6,6 +6,8 @@ import (
 	"errors"
 	"fmt"
 	"io/ioutil"
+	"log"
+	"os"
 	"path/filepath"
 
 	"github.com/ghokun/climan-runner/pkg/platform"
@@ -43,6 +45,35 @@ func GenerateTools() (err error) {
 	toolsFile := filepath.Join(".", "docs", "tools.json")
 	err = ioutil.WriteFile(toolsFile, data, 0644)
 	return err
+}
+
+func generateToolSpecificFiles(toolName string, latest string, getVersions func() ([]string, error), generateVersion func(string) ToolVersion) {
+	folder := filepath.Join(".", "docs", toolName)
+	os.Mkdir(folder, os.ModePerm)
+
+	// Generate versions.json
+	versionsJson, err := getVersions()
+	if err != nil {
+		log.Fatal(err)
+	}
+	err = writeJson(folder, "versions.json", versionsJson)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Generate template.json
+	templateJson := generateVersion("{{.Version}}")
+	err = writeJson(folder, "template.json", templateJson)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Generate latest.json
+	latestJson := generateVersion(latest)
+	err = writeJson(folder, "latest.json", latestJson)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func getLatestReleaseFromGithub(owner string, repo string, name string, desc string, platforms ...string) (t Tool, err error) {

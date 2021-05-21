@@ -2,8 +2,6 @@ package tool
 
 import (
 	"log"
-	"os"
-	"path/filepath"
 	"strings"
 )
 
@@ -13,30 +11,7 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, flux)
-	// Generate flux specific directory
-	folder := filepath.Join(".", "docs", flux.Name)
-	os.Mkdir(folder, os.ModePerm)
-	// Generate versions.json
-	toolVersions, err := getFluxVersions()
-	if err != nil {
-		log.Fatal(err)
-	}
-	err = writeJson(folder, "versions.json", toolVersions)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate template.json
-	template := generateFluxVersion("{{.Version}}")
-	err = writeJson(folder, "template.json", template)
-	if err != nil {
-		log.Fatal(err)
-	}
-	// Generate latest.json
-	latest := generateFluxVersion(flux.Latest)
-	err = writeJson(folder, "latest.json", latest)
-	if err != nil {
-		log.Fatal(err)
-	}
+	generateToolSpecificFiles("flux", flux.Latest, getFluxVersions, generateFluxVersion)
 }
 
 func getFlux() (flux Tool, err error) {
