@@ -25,7 +25,7 @@ func getKustomize() (kustomize Tool, err error) {
 	owner := "kubernetes-sigs"
 	repo := "kustomize"
 	name := "kustomize"
-	
+
 	tags, response, err := client.Repositories.ListTags(context.Background(), owner, repo, &github.ListOptions{
 		Page:    0,
 		PerPage: 1000,

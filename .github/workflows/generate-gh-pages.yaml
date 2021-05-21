@@ -1,9 +1,9 @@
-name: Generate Tools Page
+name: Generate gh-pages
 on:
   schedule:
   - cron: "0 * * * *"
 jobs:
-  generate-index:
+  tools-page:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Go
@@ -26,3 +26,13 @@ jobs:
           git add .
           git commit -am "Actions commit" || echo "No changes to commit"
           git push
+  mkdocs:
+    needs: tools-page
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material
+      - run: mkdocs gh-deploy --force
