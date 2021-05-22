@@ -1,9 +1,30 @@
+# Project information
 site_name: climan
+site_url: https://climan.dev
+site_author: ghokun
+site_description: cli manager for cloud native technologies
+
+# Repository
+repo_name: ghokun/climan
+repo_url: https://github.com/ghokun/climan
+edit_uri: https://github.com/ghokun/climan-runner/edit/main/docs/
+
+# Copyright
+copyright: MIT Licence
+
+# Configuration
 theme:
   name: material
-  icon:
-    logo: octicons/file-binary-24
-    repo: fontawesome/brands/github
+
+  # Don't include MkDocs' JavaScript
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  features:
+    - navigation.instant
+    - navigation.sections
   palette:
     - scheme: default
       primary: indigo
@@ -15,21 +36,21 @@ theme:
       toggle:
         icon: octicons/sun-16
         name: Switch to light mode
-  features:
-    - navigation.instant
-    - navigation.sections
-nav:
-  - Quickstart: index.md
-  - Install:  install.md
-  - Usage: usage.md
-  - Tools: tools.md
-  - Uninstall: uninstall.md
-  - Contribute: contribute.md
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+  icon:
+    logo: octicons/file-binary-24
+    repo: fontawesome/brands/github
 
-repo_name: ghokun/climan
-repo_url: https://github.com/ghokun/climan
-edit_uri: https://github.com/ghokun/climan-runner/edit/main/docs/
+# Plugins
+plugins:
+  - search
+  - minify:
+      minify_html: true
 
+# Customization
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -39,4 +60,11 @@ extra:
       link: https://twitter.com/ghokun
       name: ghokun on Twitter
 
-copyright: ghokun - MIT Licence
+# Page tree
+nav:
+  - Quickstart: index.md
+  - Install:  install.md
+  - Usage: usage.md
+  - Tools: tools.md
+  - Uninstall: uninstall.md
+  - Contribute: contribute.md
