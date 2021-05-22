@@ -1,7 +1,6 @@
 package tool
 
 import (
-	"errors"
 	"fmt"
 	"log"
 	"strings"
@@ -24,12 +23,21 @@ func getKustomize() (kustomize Tool, err error) {
 	repo := "kustomize"
 	name := "kustomize"
 
-	tags, err := getTagsFromGithub(owner, repo, name)
+	// kustomize repository has tags with prefixes
+	// Github api has 100 element limit for each tag page
+	// A better solution is needed to fix
+	// TODO for later
+	tags, err := getTagsFromGithubWithPage(owner, repo, name, 1, 100)
 	if err != nil {
 		return kustomize, err
 	}
+	secondPage, err := getTagsFromGithubWithPage(owner, repo, name, 2, 100)
+	if err != nil {
+		return kustomize, err
+	}
+	tags = append(tags, secondPage...)
 	if len(tags) < 0 {
-		return kustomize, errors.Unwrap(fmt.Errorf("no tag found for %q", name))
+		return kustomize, fmt.Errorf("no tag found for %q", name)
 	}
 	var versions []string
 	var latest string

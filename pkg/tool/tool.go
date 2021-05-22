@@ -3,7 +3,6 @@ package tool
 import (
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -107,7 +106,7 @@ func getLatestReleaseFromGithub(owner string, repo string, name string, desc str
 			Latest:      *release.TagName,
 		}, nil
 	}
-	return t, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
+	return t, fmt.Errorf("error while fetcing latest version of %q", name)
 }
 
 func getLatestTagFromGithub(owner string, repo string, name string, desc string, platforms ...string) (t Tool, err error) {
@@ -119,7 +118,7 @@ func getLatestTagFromGithub(owner string, repo string, name string, desc string,
 		return t, err
 	}
 	if len(tags) < 0 {
-		return t, errors.Unwrap(fmt.Errorf("no tag found for %q", name))
+		return t, fmt.Errorf("no tag found for %q", name)
 	}
 	if response.StatusCode == 200 {
 		return Tool{
@@ -129,7 +128,7 @@ func getLatestTagFromGithub(owner string, repo string, name string, desc string,
 			Latest:      *tags[0].Name,
 		}, nil
 	}
-	return t, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
+	return t, fmt.Errorf("error while fetcing latest version of %q", name)
 }
 
 func getReleasesFromGithub(owner string, repo string, name string) (releases []*github.RepositoryRelease, err error) {
@@ -143,13 +142,17 @@ func getReleasesFromGithub(owner string, repo string, name string) (releases []*
 	if response.StatusCode == 200 {
 		return releases, nil
 	}
-	return releases, errors.Unwrap(fmt.Errorf("error while fetcing releases of %q", name))
+	return releases, fmt.Errorf("error while fetcing releases of %q", name)
 }
 
 func getTagsFromGithub(owner string, repo string, name string) (tags []*github.RepositoryTag, err error) {
+	return getTagsFromGithubWithPage(owner, repo, name, 0, 100)
+}
+
+func getTagsFromGithubWithPage(owner string, repo string, name string, page int, perPage int) (tags []*github.RepositoryTag, err error) {
 	tags, response, err := client.Repositories.ListTags(context.Background(), owner, repo, &github.ListOptions{
-		Page:    0,
-		PerPage: 100,
+		Page:    page,
+		PerPage: perPage,
 	})
 	if err != nil {
 		return tags, err
@@ -157,7 +160,7 @@ func getTagsFromGithub(owner string, repo string, name string) (tags []*github.R
 	if response.StatusCode == 200 {
 		return tags, nil
 	}
-	return tags, errors.Unwrap(fmt.Errorf("error while fetcing tags of %q", name))
+	return tags, fmt.Errorf("error while fetcing tags of %q", name)
 }
 
 func getVersionsFromMirrorOpenshift(name string, url string) (toolVersions []string, err error) {
@@ -167,11 +170,11 @@ func getVersionsFromMirrorOpenshift(name string, url string) (toolVersions []str
 	}
 	defer res.Body.Close()
 	if res.StatusCode != 200 {
-		return nil, errors.Unwrap(fmt.Errorf("error while fetcing releases of %q", name))
+		return nil, fmt.Errorf("error while fetcing releases of %q", name)
 	}
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	if err != nil {
-		return nil, errors.Unwrap(fmt.Errorf("error while scraping %q", url))
+		return nil, fmt.Errorf("error while scraping %q", url)
 	}
 	doc.Find("a").Each(func(i int, s *goquery.Selection) {
 		text := s.Text()

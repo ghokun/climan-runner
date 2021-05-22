@@ -1,7 +1,6 @@
 package tool
 
 import (
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -124,11 +123,11 @@ func getLatestVersion(url string, prefix string, suffix string) (version string,
 	}
 	defer res.Body.Close()
 	if res.StatusCode != 200 {
-		return version, errors.Unwrap(fmt.Errorf("error while scraping latest version of openshift tools"))
+		return version, fmt.Errorf("error while scraping latest version of openshift tools")
 	}
 	doc, err := goquery.NewDocumentFromReader(res.Body)
 	if err != nil {
-		return version, errors.Unwrap(fmt.Errorf("error while scraping %q", url))
+		return version, fmt.Errorf("error while scraping %q", url)
 	}
 	doc.Find("a").Each(func(i int, s *goquery.Selection) {
 		if text, ok := s.Attr("href"); ok {
