@@ -15,10 +15,12 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, kubectl)
-	generateToolSpecificFiles("kubectl", kubectl.Latest, getKubectlVersions, generateKubectlVersion)
 }
 
 func getKubectl() (kubectl Tool, err error) {
+	owner := "kubernetes"
+	repo := "kubernetes"
+	name := "kubectl"
 	response, err := http.Get("https://storage.googleapis.com/kubernetes-release/release/stable.txt")
 	if err != nil {
 		return kubectl, err
@@ -30,7 +32,7 @@ func getKubectl() (kubectl Tool, err error) {
 			return kubectl, err
 		}
 		return Tool{
-			Name:        "kubectl",
+			Name:        name,
 			Description: "Kubernetes command line tool",
 			Supports: platform.CalculateSupportedPlatforms(
 				[]string{"darwin_amd64",
@@ -44,77 +46,76 @@ func getKubectl() (kubectl Tool, err error) {
 					"windows_386",
 					"windows_amd64"}),
 			Latest: string(bodyBytes),
+			GetVersions: func() (toolVersions []string, err error) {
+				releases, err := getReleasesFromGithub(owner, repo, name)
+				if err != nil {
+					return nil, err
+				}
+				for _, release := range releases {
+					toolVersions = append(toolVersions, *release.TagName)
+				}
+				return toolVersions, nil
+			},
+			GenerateVersion: func(version string) (toolVersion ToolVersion) {
+				baseUrl := "https://storage.googleapis.com/kubernetes-release/release/" + version
+				alg := "sha256"
+				return ToolVersion{
+					Version: version,
+					Platforms: map[string]ToolDownload{
+						"darwin_amd64": {
+							Url:      baseUrl + "/bin/darwin/amd64/kubectl",
+							Checksum: baseUrl + "/bin/darwin/amd64/kubectl.sha256",
+							Alg:      alg,
+						},
+						"darwin_arm64": {
+							Url:      baseUrl + "/bin/darwin/arm64/kubectl",
+							Checksum: baseUrl + "/bin/darwin/arm64/kubectl.sha256",
+							Alg:      alg,
+						},
+						"linux_386": {
+							Url:      baseUrl + "/bin/linux/386/kubectl",
+							Checksum: baseUrl + "/bin/linux/386/kubectl.sha256",
+							Alg:      alg,
+						},
+						"linux_amd64": {
+							Url:      baseUrl + "/bin/linux/amd64/kubectl",
+							Checksum: baseUrl + "/bin/linux/amd64/kubectl.sha256",
+							Alg:      alg,
+						},
+						"linux_arm": {
+							Url:      baseUrl + "/bin/linux/arm/kubectl",
+							Checksum: baseUrl + "/bin/linux/arm/kubectl.sha256",
+							Alg:      alg,
+						},
+						"linux_arm64": {
+							Url:      baseUrl + "/bin/linux/arm64/kubectl",
+							Checksum: baseUrl + "/bin/linux/arm64/kubectl.sha256",
+							Alg:      alg,
+						},
+						"linux_ppc64le": {
+							Url:      baseUrl + "/bin/linux/ppc64le/kubectl",
+							Checksum: baseUrl + "/bin/linux/ppc64le/kubectl.sha256",
+							Alg:      alg,
+						},
+						"linux_s390x": {
+							Url:      baseUrl + "/bin/linux/s390x/kubectl",
+							Checksum: baseUrl + "/bin/linux/s390x/kubectl.sha256",
+							Alg:      alg,
+						},
+						"windows_386": {
+							Url:      baseUrl + "/bin/windows/386/kubectl.exe",
+							Checksum: baseUrl + "/bin/windows/386/kubectl.exe.sha256",
+							Alg:      alg,
+						},
+						"windows_amd64": {
+							Url:      baseUrl + "/bin/windows/amd64/kubectl.exe",
+							Checksum: baseUrl + "/bin/windows/amd64/kubectl.exe.sha256",
+							Alg:      alg,
+						},
+					},
+				}
+			},
 		}, nil
 	}
 	return kubectl, errors.New("error while fetcing latest version of kubectl")
-}
-
-func getKubectlVersions() (toolVersions []string, err error) {
-	releases, err := getReleasesFromGithub("kubernetes", "kubernetes", "kubectl")
-	if err != nil {
-		return nil, err
-	}
-	for _, release := range releases {
-		toolVersions = append(toolVersions, *release.TagName)
-	}
-	return toolVersions, nil
-}
-
-func generateKubectlVersion(version string) (toolVersion ToolVersion) {
-	baseUrl := "https://storage.googleapis.com/kubernetes-release/release/" + version
-	return ToolVersion{
-		Version: version,
-		Platforms: map[string]ToolDownload{
-			"darwin_amd64": {
-				Url:      baseUrl + "/bin/darwin/amd64/kubectl",
-				Checksum: baseUrl + "/bin/darwin/amd64/kubectl.sha256",
-				Alg:      "sha256",
-			},
-			"darwin_arm64": {
-				Url:      baseUrl + "/bin/darwin/arm64/kubectl",
-				Checksum: baseUrl + "/bin/darwin/arm64/kubectl.sha256",
-				Alg:      "sha256",
-			},
-			"linux_386": {
-				Url:      baseUrl + "/bin/linux/386/kubectl",
-				Checksum: baseUrl + "/bin/linux/386/kubectl.sha256",
-				Alg:      "sha256",
-			},
-			"linux_amd64": {
-				Url:      baseUrl + "/bin/linux/amd64/kubectl",
-				Checksum: baseUrl + "/bin/linux/amd64/kubectl.sha256",
-				Alg:      "sha256",
-			},
-			"linux_arm": {
-				Url:      baseUrl + "/bin/linux/arm/kubectl",
-				Checksum: baseUrl + "/bin/linux/arm/kubectl.sha256",
-				Alg:      "sha256",
-			},
-			"linux_arm64": {
-				Url:      baseUrl + "/bin/linux/arm64/kubectl",
-				Checksum: baseUrl + "/bin/linux/arm64/kubectl.sha256",
-				Alg:      "sha256",
-			},
-			"linux_ppc64le": {
-				Url:      baseUrl + "/bin/linux/ppc64le/kubectl",
-				Checksum: baseUrl + "/bin/linux/ppc64le/kubectl.sha256",
-				Alg:      "sha256",
-			},
-			"linux_s390x": {
-				Url:      baseUrl + "/bin/linux/s390x/kubectl",
-				Checksum: baseUrl + "/bin/linux/s390x/kubectl.sha256",
-				Alg:      "sha256",
-			},
-			"windows_386": {
-				Url:      baseUrl + "/bin/windows/386/kubectl.exe",
-				Checksum: baseUrl + "/bin/windows/386/kubectl.exe.sha256",
-				Alg:      "sha256",
-			},
-			"windows_amd64": {
-				Url:      baseUrl + "/bin/windows/amd64/kubectl.exe",
-				Checksum: baseUrl + "/bin/windows/amd64/kubectl.exe.sha256",
-				Alg:      "sha256",
-			},
-		},
-	}
 }

@@ -10,41 +10,42 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, plumber)
-	generateToolSpecificFiles("plumber", plumber.Latest, getPlumberVersions, generatePlumberVersion)
 }
 
 func getPlumber() (plumber Tool, err error) {
-	return getLatestReleaseFromGithub("batchcorp", "plumber", "plumber", "Cli for messaging systems",
+	owner := "batchcorp"
+	repo := "plumber"
+	name := "plumber"
+	plumber, err = getLatestReleaseFromGithub(owner, repo, name, "Cli for messaging systems",
 		"darwin_amd64",
 		"linux_amd64",
 		"windows_amd64")
-}
-
-func getPlumberVersions() (toolVersions []string, err error) {
-	releases, err := getReleasesFromGithub("batchcorp", "plumber", "plumber")
-	if err != nil {
-		return nil, err
+	plumber.GetVersions = func() (toolVersions []string, err error) {
+		releases, err := getReleasesFromGithub(owner, repo, name)
+		if err != nil {
+			return nil, err
+		}
+		for _, release := range releases {
+			toolVersions = append(toolVersions, *release.TagName)
+		}
+		return toolVersions, nil
 	}
-	for _, release := range releases {
-		toolVersions = append(toolVersions, *release.TagName)
+	plumber.GenerateVersion = func(version string) (toolVersion ToolVersion) {
+		baseUrl := "https://github.com/batchcorp/plumber/releases/download/" + version
+		return ToolVersion{
+			Version: version,
+			Platforms: map[string]ToolDownload{
+				"darwin_amd64": {
+					Url: baseUrl + "/plumber-darwin",
+				},
+				"linux_amd64": {
+					Url: baseUrl + "/plumber-linux",
+				},
+				"windows_amd64": {
+					Url: baseUrl + "/plumber-windows.exe",
+				},
+			},
+		}
 	}
-	return toolVersions, nil
-}
-
-func generatePlumberVersion(version string) (toolVersion ToolVersion) {
-	baseUrl := "https://github.com/batchcorp/plumber/releases/download/" + version
-	return ToolVersion{
-		Version: version,
-		Platforms: map[string]ToolDownload{
-			"darwin_amd64": {
-				Url: baseUrl + "/plumber-darwin",
-			},
-			"linux_amd64": {
-				Url: baseUrl + "/plumber-linux",
-			},
-			"windows_amd64": {
-				Url: baseUrl + "/plumber-windows.exe",
-			},
-		},
-	}
+	return plumber, err
 }

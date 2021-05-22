@@ -16,7 +16,6 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, crc)
-	generateToolSpecificFiles("crc", crc.Latest, getCrcVersions, generateCrcVersion)
 }
 
 type crcData struct {
@@ -48,42 +47,39 @@ func getCrc() (crc Tool, err error) {
 			Latest: data["version"].CrcVersion,
 		}, nil
 	}
-	return crc, errors.New("error while fetcing latest version of crc")
-}
-
-// TODO get from mirror openshift
-func getCrcVersions() (toolVersions []string, err error) {
-	releases, err := getReleasesFromGithub("code-ready", "crc", "crc")
-	if err != nil {
-		return nil, err
+	crc.GetVersions = func() (toolVersions []string, err error) {
+		releases, err := getReleasesFromGithub("code-ready", "crc", "crc") // TODO
+		if err != nil {
+			return nil, err
+		}
+		for _, release := range releases {
+			// Versions starting with 0 are not hosted on openshift mirror
+			if !strings.HasPrefix(*release.TagName, "0.") {
+				toolVersions = append(toolVersions, *release.TagName)
+			}
+		}
+		return toolVersions, nil
 	}
-	for _, release := range releases {
-		// Versions starting with 0 are not hosted on openshift mirror
-		if !strings.HasPrefix(*release.TagName, "0.") {
-			toolVersions = append(toolVersions, *release.TagName)
+	crc.GenerateVersion = func(version string) (toolVersion ToolVersion) {
+		baseUrl := "https://mirror.openshift.com/pub/openshift-v4/clients/crc/" + strings.TrimPrefix(version, "v")
+		return ToolVersion{
+			Version: version,
+			Platforms: map[string]ToolDownload{
+				"darwin_amd64": {
+					Url:      baseUrl + "/crc-macos-amd64.tar.xz",
+					Checksum: baseUrl + "/sha256sum.txt",
+					Alg:      "sha256",
+				},
+				"linux_amd64": {
+					Url:      baseUrl + "/crc-linux-amd64.tar.xz",
+					Checksum: baseUrl + "/sha256sum.txt",
+					Alg:      "sha256"},
+				"windows_amd64": {
+					Url:      baseUrl + "/crc-windows-amd64.zip",
+					Checksum: baseUrl + "/sha256sum.txt",
+					Alg:      "sha256"},
+			},
 		}
 	}
-	return toolVersions, nil
-}
-
-func generateCrcVersion(version string) (toolVersion ToolVersion) {
-	baseUrl := "https://mirror.openshift.com/pub/openshift-v4/clients/crc/" + strings.TrimPrefix(version, "v")
-	return ToolVersion{
-		Version: version,
-		Platforms: map[string]ToolDownload{
-			"darwin_amd64": {
-				Url:      baseUrl + "/crc-macos-amd64.tar.xz",
-				Checksum: baseUrl + "/sha256sum.txt",
-				Alg:      "sha256",
-			},
-			"linux_amd64": {
-				Url:      baseUrl + "/crc-linux-amd64.tar.xz",
-				Checksum: baseUrl + "/sha256sum.txt",
-				Alg:      "sha256"},
-			"windows_amd64": {
-				Url:      baseUrl + "/crc-windows-amd64.zip",
-				Checksum: baseUrl + "/sha256sum.txt",
-				Alg:      "sha256"},
-		},
-	}
+	return crc, errors.New("error while fetcing latest version of crc")
 }

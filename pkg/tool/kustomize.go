@@ -17,7 +17,6 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, kustomize)
-	generateToolSpecificFiles("kustomize", kustomize.Latest, getKustomizeVersions, generateKustomizeVersion)
 }
 
 func getKustomize() (kustomize Tool, err error) {
@@ -39,7 +38,7 @@ func getKustomize() (kustomize Tool, err error) {
 	if response.StatusCode == 200 {
 		for _, tag := range tags {
 			// This is the way
-			if strings.HasPrefix(*tag.Name, "kustomize") {
+			if strings.HasPrefix(*tag.Name, name) {
 				return Tool{
 					Name:        name,
 					Description: "Customization of kubernetes YAML configurations",
@@ -49,6 +48,47 @@ func getKustomize() (kustomize Tool, err error) {
 							"linux_arm64",
 							"windows_amd64"}),
 					Latest: strings.TrimPrefix(*tag.Name, "kustomize/"),
+					GetVersions: func() (toolVersions []string, err error) {
+						releases, err := getReleasesFromGithub(owner, repo, name)
+						if err != nil {
+							return nil, err
+						}
+						for _, release := range releases {
+							if strings.HasPrefix(release.GetTagName(), name) {
+								toolVersions = append(toolVersions, strings.TrimPrefix(release.GetTagName(), "kustomize/"))
+							}
+						}
+						return toolVersions, nil
+					},
+					GenerateVersion: func(version string) (toolVersion ToolVersion) {
+						baseUrl := "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F" + version
+						alg := "sha256"
+						return ToolVersion{
+							Version: version,
+							Platforms: map[string]ToolDownload{
+								"darwin_amd64": {
+									Url:      baseUrl + "/kustomize_" + version + "_darwin_amd64.tar.gz",
+									Checksum: baseUrl + "/checksums.txt",
+									Alg:      alg,
+								},
+								"linux_amd64": {
+									Url:      baseUrl + "/kustomize_" + version + "_linux_amd64.tar.gz",
+									Checksum: baseUrl + "/checksums.txt",
+									Alg:      alg,
+								},
+								"linux_arm64": {
+									Url:      baseUrl + "/kustomize_" + version + "_linux_arm64.tar.gz",
+									Checksum: baseUrl + "/checksums.txt",
+									Alg:      alg,
+								},
+								"windows_amd64": {
+									Url:      baseUrl + "/kustomize_" + version + "_windows_amd64.tar.gz",
+									Checksum: baseUrl + "/checksums.txt",
+									Alg:      alg,
+								},
+							},
+						}
+					},
 				}, nil
 			}
 		}
@@ -57,44 +97,3 @@ func getKustomize() (kustomize Tool, err error) {
 }
 
 // TODO fix getting versions
-func getKustomizeVersions() (toolVersions []string, err error) {
-	releases, err := getReleasesFromGithub("kubernetes-sigs", "kustomize", "kustomize")
-	if err != nil {
-		return nil, err
-	}
-	for _, release := range releases {
-		if strings.HasPrefix(release.GetTagName(), "kustomize") {
-			toolVersions = append(toolVersions, strings.TrimPrefix(release.GetTagName(), "kustomize/"))
-		}
-	}
-	return toolVersions, nil
-}
-
-func generateKustomizeVersion(version string) (toolVersion ToolVersion) {
-	baseUrl := "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F" + version
-	return ToolVersion{
-		Version: version,
-		Platforms: map[string]ToolDownload{
-			"darwin_amd64": {
-				Url:      baseUrl + "/kustomize_" + version + "_darwin_amd64.tar.gz",
-				Checksum: baseUrl + "/checksums.txt",
-				Alg:      "sha256",
-			},
-			"linux_amd64": {
-				Url:      baseUrl + "/kustomize_" + version + "_linux_amd64.tar.gz",
-				Checksum: baseUrl + "/checksums.txt",
-				Alg:      "sha256",
-			},
-			"linux_arm64": {
-				Url:      baseUrl + "/kustomize_" + version + "_linux_arm64.tar.gz",
-				Checksum: baseUrl + "/checksums.txt",
-				Alg:      "sha256",
-			},
-			"windows_amd64": {
-				Url:      baseUrl + "/kustomize_" + version + "_windows_amd64.tar.gz",
-				Checksum: baseUrl + "/checksums.txt",
-				Alg:      "sha256",
-			},
-		},
-	}
-}

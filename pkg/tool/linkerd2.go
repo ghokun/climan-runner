@@ -10,65 +10,67 @@ func init() {
 		log.Fatal(err)
 	}
 	Tools = append(Tools, linkerd2)
-	generateToolSpecificFiles("linkerd2", linkerd2.Latest, getLinkerd2Versions, generateLinkerd2Version)
 }
 
 func getLinkerd2() (linkerd2 Tool, err error) {
-	return getLatestReleaseFromGithub("linkerd", "linkerd2", "linkerd2", "Ultralight, security-first service mesh for Kubernetes",
+	owner := "linkerd"
+	repo := "linkerd2"
+	name := "linkerd2"
+	linkerd2, err = getLatestReleaseFromGithub(owner, repo, name, "Ultralight, security-first service mesh for Kubernetes",
 		"darwin_amd64",
 		"darwin_arm64",
 		"linux_amd64",
 		"linux_arm",
 		"linux_arm64",
 		"windows_amd64")
-}
-
-func getLinkerd2Versions() (toolVersions []string, err error) {
-	releases, err := getReleasesFromGithub("linkerd", "linkerd2", "linkerd2")
-	if err != nil {
-		return nil, err
+	linkerd2.GetVersions = func() (toolVersions []string, err error) {
+		releases, err := getReleasesFromGithub(owner, repo, name)
+		if err != nil {
+			return nil, err
+		}
+		for _, release := range releases {
+			toolVersions = append(toolVersions, *release.TagName)
+		}
+		return toolVersions, nil
 	}
-	for _, release := range releases {
-		toolVersions = append(toolVersions, *release.TagName)
+	linkerd2.GenerateVersion = func(version string) (toolVersion ToolVersion) {
+		baseUrl := "https://github.com/linkerd/linkerd2/releases/download/" + version + "/linkerd2-cli-" + version
+		alg := "sha256"
+		return ToolVersion{
+			Version: version,
+			Platforms: map[string]ToolDownload{
+				"darwin_amd64": {
+					Url:      baseUrl + "-darwin",
+					Checksum: baseUrl + "-darwin.sha256",
+					Alg:      alg,
+				},
+				"darwin_arm64": {
+					Url:      baseUrl + "-darwin-arm64",
+					Checksum: baseUrl + "-darwin-arm64.sha256",
+					Alg:      alg,
+				},
+				"linux_amd64": {
+					Url:      baseUrl + "-linux-amd64",
+					Checksum: baseUrl + "-linux-amd64.sha256",
+					Alg:      alg,
+				},
+				"linux_arm": {
+					Url:      baseUrl + "-linux-arm",
+					Checksum: baseUrl + "-linux-arm.sha256",
+					Alg:      alg,
+				},
+				"linux_arm64": {
+					Url:      baseUrl + "-linux-arm64",
+					Checksum: baseUrl + "-linux-arm64.sha256",
+					Alg:      alg,
+				},
+				"windows_amd64": {
+					Url:      baseUrl + "-windows.exe",
+					Checksum: baseUrl + "-windows.exe.sha256",
+					Alg:      alg,
+				},
+			},
+		}
 	}
-	return toolVersions, nil
-}
-
-func generateLinkerd2Version(version string) (toolVersion ToolVersion) {
-	baseUrl := "https://github.com/linkerd/linkerd2/releases/download/" + version
-	return ToolVersion{
-		Version: version,
-		Platforms: map[string]ToolDownload{
-			"darwin_amd64": {
-				Url:      baseUrl + "/linkerd2-cli-" + version + "-darwin",
-				Checksum: baseUrl + "/linkerd2-cli-" + version + "-darwin.sha256",
-				Alg:      "sha256",
-			},
-			"darwin_arm64": {
-				Url:      baseUrl + "/linkerd2-cli-" + version + "-darwin-arm64",
-				Checksum: baseUrl + "/linkerd2-cli-" + version + "-darwin-arm64.sha256",
-				Alg:      "sha256",
-			},
-			"linux_amd64": {
-				Url:      baseUrl + "/linkerd2-cli-" + version + "-linux-amd64",
-				Checksum: baseUrl + "/linkerd2-cli-" + version + "-linux-amd64.sha256",
-				Alg:      "sha256",
-			},
-			"linux_arm": {
-				Url:      baseUrl + "/linkerd2-cli-" + version + "-linux-arm",
-				Checksum: baseUrl + "/linkerd2-cli-" + version + "-linux-arm.sha256",
-				Alg:      "sha256",
-			},
-			"linux_arm64": {
-				Url:      baseUrl + "/linkerd2-cli-" + version + "-linux-arm64",
-				Checksum: baseUrl + "/linkerd2-cli-" + version + "-linux-arm64.sha256",
-				Alg:      "sha256",
-			},
-			"windows_amd64": {
-				Url:      baseUrl + "/linkerd2-cli-" + version + "-windows.exe",
-				Checksum: baseUrl + "/linkerd2-cli-" + version + "-windows.exe.sha256",
-				Alg:      "sha256",
-			},
-		},
-	}
+	return linkerd2, err
 }

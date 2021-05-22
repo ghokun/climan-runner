@@ -15,10 +15,12 @@ import (
 )
 
 type Tool struct {
-	Name        string `json:"name,omitempty"`
-	Description string `json:"description,omitempty"`
-	Supports    int    `json:"supports,omitempty"`
-	Latest      string `json:"latest,omitempty"`
+	Name            string                   `json:"name,omitempty"`
+	Description     string                   `json:"description,omitempty"`
+	Supports        int                      `json:"supports,omitempty"`
+	Latest          string                   `json:"latest,omitempty"`
+	GetVersions     func() ([]string, error) `json:"-"`
+	GenerateVersion func(string) ToolVersion `json:"-"`
 }
 
 type ToolVersion struct {
@@ -44,6 +46,9 @@ func GenerateTools() (err error) {
 	}
 	toolsFile := filepath.Join(".", "docs", "tools.json")
 	err = ioutil.WriteFile(toolsFile, data, 0644)
+	for _, tool := range Tools {
+		generateToolSpecificFiles(tool.Name, tool.Latest, tool.GetVersions, tool.GenerateVersion)
+	}
 	return err
 }
 
