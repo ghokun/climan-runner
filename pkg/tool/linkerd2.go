@@ -16,7 +16,7 @@ func getLinkerd2() (linkerd2 Tool, err error) {
 	owner := "linkerd"
 	repo := "linkerd2"
 	name := "linkerd2"
-	linkerd2, err = getLatestReleaseFromGithub(owner, repo, name, "Ultralight, security-first service mesh for Kubernetes",
+	linkerd2, err = getLatestReleaseFromGithub(owner, repo, name, "Ultralight, security-first service mesh",
 		"darwin_amd64",
 		"darwin_arm64",
 		"linux_amd64",
