@@ -40,13 +40,16 @@ var (
 )
 
 func GenerateTools() (err error) {
+
 	data, err := json.Marshal(Tools)
 	if err != nil {
 		return err
 	}
 	toolsFile := filepath.Join(".", "docs", "tools.json")
+	log.Println("Generating tools.json")
 	err = ioutil.WriteFile(toolsFile, data, 0644)
 	for _, tool := range Tools {
+		log.Printf("Generating files for %q", tool.Name)
 		generateToolSpecificFiles(tool.Name, tool.Latest, tool.GetVersions, tool.GenerateVersion)
 	}
 	return err
