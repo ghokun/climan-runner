@@ -1,1 +1,24 @@
-{"platforms":{"darwin_amd64":{"url":"https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/kustomize__darwin_amd64.tar.gz","checksum":"https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/checksums.txt","alg":"sha256"},"linux_amd64":{"url":"https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/kustomize__linux_amd64.tar.gz","checksum":"https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/checksums.txt","alg":"sha256"},"linux_arm64":{"url":"https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/kustomize__linux_arm64.tar.gz","checksum":"https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/checksums.txt","alg":"sha256"},"windows_amd64":{"url":"https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/kustomize__windows_amd64.tar.gz","checksum":"https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/checksums.txt","alg":"sha256"}}}
+{
+  "platforms": {
+    "darwin_amd64": {
+      "url": "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/kustomize__darwin_amd64.tar.gz",
+      "checksum": "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/checksums.txt",
+      "alg": "sha256"
+    },
+    "linux_amd64": {
+      "url": "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/kustomize__linux_amd64.tar.gz",
+      "checksum": "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/checksums.txt",
+      "alg": "sha256"
+    },
+    "linux_arm64": {
+      "url": "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/kustomize__linux_arm64.tar.gz",
+      "checksum": "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/checksums.txt",
+      "alg": "sha256"
+    },
+    "windows_amd64": {
+      "url": "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/kustomize__windows_amd64.tar.gz",
+      "checksum": "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2F/checksums.txt",
+      "alg": "sha256"
+    }
+  }
+}

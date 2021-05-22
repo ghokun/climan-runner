@@ -1,7 +1,8 @@
 name: Generate gh-pages
 on:
-  schedule:
-  - cron: "0 * * * *"
+  push:
+    branches:
+      - main
 jobs:
   tools-page:
     runs-on: ubuntu-latest

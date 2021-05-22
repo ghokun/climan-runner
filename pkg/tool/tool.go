@@ -7,9 +7,12 @@ import (
 	"fmt"
 	"io/ioutil"
 	"log"
+	"net/http"
 	"os"
 	"path/filepath"
+	"strings"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/ghokun/climan-runner/pkg/platform"
 	"github.com/google/go-github/v35/github"
 )
@@ -133,10 +136,10 @@ func getReleasesFromGithub(owner string, repo string, name string) (releases []*
 	if response.StatusCode == 200 {
 		return releases, nil
 	}
-	return releases, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
+	return releases, errors.Unwrap(fmt.Errorf("error while fetcing releases of %q", name))
 }
 
-func getTagsFromGithub(owner string, repo string, name string) (releases []*github.RepositoryTag, err error) {
+func getTagsFromGithub(owner string, repo string, name string) (tags []*github.RepositoryTag, err error) {
 	tags, response, err := client.Repositories.ListTags(context.Background(), owner, repo, &github.ListOptions{
 		Page:    0,
 		PerPage: 100,
@@ -147,7 +150,29 @@ func getTagsFromGithub(owner string, repo string, name string) (releases []*gith
 	if response.StatusCode == 200 {
 		return tags, nil
 	}
-	return tags, errors.Unwrap(fmt.Errorf("error while fetcing latest version of %q", name))
+	return tags, errors.Unwrap(fmt.Errorf("error while fetcing tags of %q", name))
+}
+
+func getVersionsFromMirrorOpenshift(name string, url string) (toolVersions []string, err error) {
+	res, err := http.Get(url)
+	if err != nil {
+		return nil, err
+	}
+	defer res.Body.Close()
+	if res.StatusCode != 200 {
+		return nil, errors.Unwrap(fmt.Errorf("error while fetcing releases of %q", name))
+	}
+	doc, err := goquery.NewDocumentFromReader(res.Body)
+	if err != nil {
+		return nil, errors.Unwrap(fmt.Errorf("error while scraping %q", url))
+	}
+	doc.Find("a").Each(func(i int, s *goquery.Selection) {
+		text := s.Text()
+		if len(text) > 0 && text[0] >= '0' && text[0] <= '9' {
+			toolVersions = append(toolVersions, strings.ReplaceAll(text, "/", ""))
+		}
+	})
+	return toolVersions, err
 }
 
 func writeJson(folder string, filename string, data interface{}) (err error) {
