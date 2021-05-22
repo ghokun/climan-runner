@@ -28,9 +28,14 @@ type Tool struct {
 
 type ToolVersion struct {
 	Version   string                  `json:"version,omitempty"`
+	Supports  int                     `json:"supports,omitempty"`
 	Platforms map[string]ToolDownload `json:"platforms,omitempty"`
 }
 
+type ToolVersions struct {
+	Supports int      `json:"supports,omitempty"`
+	Versions []string `json:"versions,omitempty"`
+}
 type ToolDownload struct {
 	Url      string `json:"url,omitempty"`
 	Checksum string `json:"checksum,omitempty"`
@@ -53,12 +58,12 @@ func GenerateTools() (err error) {
 	err = ioutil.WriteFile(toolsFile, data, 0644)
 	for _, tool := range Tools {
 		log.Printf("Generating files for %q", tool.Name)
-		generateToolSpecificFiles(tool.Name, tool.Latest, tool.GetVersions, tool.GenerateVersion)
+		generateToolSpecificFiles(tool.Name, tool.Latest, tool.Supports, tool.GetVersions, tool.GenerateVersion)
 	}
 	return err
 }
 
-func generateToolSpecificFiles(toolName string, latest string, getVersions func() ([]string, error), generateVersion func(string) ToolVersion) {
+func generateToolSpecificFiles(toolName string, latest string, supports int, getVersions func() ([]string, error), generateVersion func(string) ToolVersion) {
 	folder := filepath.Join(".", "docs", toolName)
 	os.Mkdir(folder, os.ModePerm)
 
@@ -67,13 +72,14 @@ func generateToolSpecificFiles(toolName string, latest string, getVersions func(
 	if err != nil {
 		log.Fatal(err)
 	}
-	err = writeJson(folder, "versions.json", versionsJson)
+	err = writeJson(folder, "versions.json", ToolVersions{Versions: versionsJson, Supports: supports})
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	// Generate template.json
 	templateJson := generateVersion("{{.Version}}")
+	templateJson.Supports = supports
 	err = writeJson(folder, "template.json", templateJson)
 	if err != nil {
 		log.Fatal(err)
@@ -81,6 +87,7 @@ func generateToolSpecificFiles(toolName string, latest string, getVersions func(
 
 	// Generate latest.json
 	latestJson := generateVersion(latest)
+	latestJson.Supports = supports
 	err = writeJson(folder, "latest.json", latestJson)
 	if err != nil {
 		log.Fatal(err)
