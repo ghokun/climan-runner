@@ -17,8 +17,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Generate indexes
-        run: |
-          go run main.go
+        run: go run main.go
       - name: Commit changes
         run: |
           git config --global user.name 'ghokun'
@@ -30,8 +29,11 @@ jobs:
     needs: generate-indexes
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
+      - name: Checkout
+        uses: actions/checkout@v2
+      - run: git pull origin main
+      - name: Setup python 3
+        uses: actions/setup-python@v2
         with:
           python-version: 3.x
       - run: pip install mkdocs-material
