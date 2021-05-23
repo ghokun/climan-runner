@@ -25,4 +25,5 @@ openshift-install 4.7.11      Openshift installer
 plumber           v0.22.4     Cli for messaging systems                  
 pscale            v0.38.0     Cli for PlanetScale Database               
 tkn               v0.18.0     Cli for interacting with Tekton            
+virtctl           v0.41.0     Cli for Kubevirt                           
 ```
