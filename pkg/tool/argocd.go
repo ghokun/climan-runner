@@ -16,7 +16,7 @@ func getArgocd() (argocd Tool, err error) {
 	owner := "argoproj"
 	repo := "argo-cd"
 	name := "argocd"
-	argocd, err = getLatestReleaseFromGithub(owner, repo, name, "Declarative continuous deployment for Kubernetes",
+	argocd, err = getLatestReleaseFromGithub(owner, repo, name, "Declarative continuous deployment",
 		"darwin_amd64",
 		"linux_amd64",
 		"windows_amd64")

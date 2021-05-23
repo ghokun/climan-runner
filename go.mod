@@ -5,5 +5,6 @@ go 1.16
 require (
 	github.com/PuerkitoBio/goquery v1.6.1
 	github.com/google/go-github/v35 v35.2.0
+	github.com/olekukonko/tablewriter v0.0.5
 	golang.org/x/mod v0.4.2
 )

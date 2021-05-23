@@ -16,7 +16,7 @@ func getInletsctl() (inletsctl Tool, err error) {
 	owner := "inlets"
 	repo := "inletsctl"
 	name := "inletsctl"
-	inletsctl, err = getLatestReleaseFromGithub(owner, repo, name, "The fastest way to create self-hosted exit-servers",
+	inletsctl, err = getLatestReleaseFromGithub(owner, repo, name, "Create self-hosted exit-servers",
 		"darwin_amd64",
 		"linux_amd64",
 		"linux_arm",

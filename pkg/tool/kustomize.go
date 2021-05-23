@@ -52,7 +52,7 @@ func getKustomize() (kustomize Tool, err error) {
 	}
 	return Tool{
 		Name:        name,
-		Description: "Customization of kubernetes YAML configurations",
+		Description: "Customization of kubernetes configurations",
 		Supports: platform.CalculateSupportedPlatforms(
 			[]string{"darwin_amd64",
 				"linux_amd64",

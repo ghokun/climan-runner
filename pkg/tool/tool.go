@@ -14,6 +14,7 @@ import (
 	"github.com/PuerkitoBio/goquery"
 	"github.com/ghokun/climan-runner/pkg/platform"
 	"github.com/google/go-github/v35/github"
+	"github.com/olekukonko/tablewriter"
 )
 
 type Tool struct {
@@ -47,19 +48,59 @@ var (
 )
 
 func GenerateTools() (err error) {
-
 	data, err := json.Marshal(Tools)
 	if err != nil {
 		return err
 	}
 	toolsFile := filepath.Join(".", "docs", "tools.json")
+
 	log.Println("Generating tools.json")
 	err = ioutil.WriteFile(toolsFile, data, 0644)
+	if err != nil {
+		return err
+	}
+	log.Println("Generating tools.md")
+	err = generateToolsMarkdown()
+	if err != nil {
+		return err
+	}
 	for _, tool := range Tools {
 		log.Printf("Generating files for %q", tool.Name)
 		generateToolSpecificFiles(tool.Name, tool.Latest, tool.Supports, tool.GetVersions, tool.GenerateVersion)
 	}
 	return err
+}
+
+func generateToolsMarkdown() error {
+	toolsMarkdown := filepath.Join(".", "docs", "tools.md")
+	if err := os.Remove(toolsMarkdown); err != nil {
+		return err
+	}
+	file, err := os.OpenFile(toolsMarkdown, os.O_WRONLY|os.O_CREATE, 0644)
+	if err != nil {
+		return err
+	}
+	defer file.Close()
+	file.Write([]byte("```\n"))
+	table := tablewriter.NewWriter(file)
+	table.SetHeader([]string{"Name", "Latest", "Description"})
+	table.SetAutoWrapText(false)
+	table.SetAutoFormatHeaders(true)
+	table.SetHeaderAlignment(tablewriter.ALIGN_LEFT)
+	table.SetAlignment(tablewriter.ALIGN_LEFT)
+	table.SetCenterSeparator("")
+	table.SetColumnSeparator("")
+	table.SetRowSeparator("")
+	table.SetHeaderLine(false)
+	table.SetBorder(false)
+	table.SetTablePadding(" ")
+	table.SetNoWhiteSpace(true)
+	for _, value := range Tools {
+		table.Append([]string{value.Name, value.Latest, value.Description})
+	}
+	table.Render()
+	file.Write([]byte("```\n"))
+	return nil
 }
 
 func generateToolSpecificFiles(toolName string, latest string, supports int, getVersions func() ([]string, error), generateVersion func(string) ToolVersion) {

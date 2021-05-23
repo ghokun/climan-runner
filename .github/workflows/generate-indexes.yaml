@@ -1,8 +1,11 @@
 name: Generate Indexes
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
   schedule:
-  - cron: "30 * * * *"
+    - cron: "0 */6 * * *"
 jobs:
   generate-indexes:
     runs-on: ubuntu-latest
@@ -23,3 +26,14 @@ jobs:
           git add .
           git commit -am "Actions commit" || echo "No changes to commit"
           git push
+  mkdocs:
+    needs: generate-indexes
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+      - run: pip install mkdocs-material
+      - run: pip install mkdocs-minify-plugin
+      - run: mkdocs gh-deploy --force
