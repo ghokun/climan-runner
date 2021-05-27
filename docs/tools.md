@@ -3,7 +3,7 @@ NAME              LATEST      DESCRIPTION
 argocd            v2.0.2      Declarative continuous deployment          
 arkade            0.7.15      Open Source Kubernetes Marketplace         
 climan            v0.0.4      Cloud tools cli manager                    
-crc               1.26.0      Local single node Openshift                
+crc               1.27.0      Local single node Openshift                
 faas-cli          0.13.9      Cli for OpenFaaS                           
 flux              v0.13.4     Cli for Flux                               
 helm              v3.5.4      The Kubernetes Package Manager             
