@@ -13,11 +13,11 @@ k3d               v4.4.4      k3s in Docker
 k3sup             0.11.0      Bootstrap Kubernetes with k3s              
 kam               v0.0.32     GitOps Application Manager                 
 kamel             v1.4.0      Cli for Apacke Camel-K                     
-kind              v0.11.0     Kubernetes in Docker                       
+kind              v0.11.1     Kubernetes in Docker                       
 kn                v0.23.0     Knative cli                                
 kubectl           v1.21.1     Kubernetes command line tool               
 kustomize         v4.1.3      Customization of kubernetes configurations 
-linkerd2          edge-21.5.2 Ultralight, security-first service mesh    
+linkerd2          edge-21.5.3 Ultralight, security-first service mesh    
 minikube          v1.20.0     Run Kubernetes locally                     
 odo               v2.2.1      Developer-focused cli for OpenShift        
 oc                4.7.12      Openshift command line interface           
