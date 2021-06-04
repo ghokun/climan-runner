@@ -17,7 +17,7 @@ kind              v0.11.1     Kubernetes in Docker
 kn                v0.23.0     Knative cli                                
 kubectl           v1.21.1     Kubernetes command line tool               
 kustomize         v4.1.3      Customization of kubernetes configurations 
-linkerd2          edge-21.5.3 Ultralight, security-first service mesh    
+linkerd2          edge-21.6.1 Ultralight, security-first service mesh    
 minikube          v1.20.0     Run Kubernetes locally                     
 odo               v2.2.1      Developer-focused cli for OpenShift        
 oc                4.7.13      Openshift command line interface           
