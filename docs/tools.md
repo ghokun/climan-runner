@@ -24,6 +24,6 @@ oc                4.7.13      Openshift command line interface
 openshift-install 4.7.13      Openshift installer                        
 plumber           v0.23.0     Cli for messaging systems                  
 pscale            v0.45.0     Cli for PlanetScale Database               
-tkn               v0.18.0     Cli for interacting with Tekton            
+tkn               v0.19.0     Cli for interacting with Tekton            
 virtctl           v0.41.0     Cli for Kubevirt                           
 ```
