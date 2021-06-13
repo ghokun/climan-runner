@@ -9,7 +9,7 @@ flux              v0.14.2     Cli for Flux
 helm              v3.6.0      The Kubernetes Package Manager             
 inletsctl         0.8.4       Create self-hosted exit-servers            
 istioctl          1.10.1      Cli for Istio service mesh                 
-k3d               v4.4.4      k3s in Docker                              
+k3d               v4.4.5      k3s in Docker                              
 k3sup             0.11.0      Bootstrap Kubernetes with k3s              
 kam               v0.0.33     GitOps Application Manager                 
 kamel             v1.4.0      Cli for Apacke Camel-K                     
