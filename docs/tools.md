@@ -23,7 +23,7 @@ odo               v2.2.2      Developer-focused cli for OpenShift
 oc                4.7.13      Openshift command line interface           
 openshift-install 4.7.13      Openshift installer                        
 plumber           v0.25.2     Cli for messaging systems                  
-pscale            v0.47.0     Cli for PlanetScale Database               
+pscale            v0.48.0     Cli for PlanetScale Database               
 tkn               v0.19.0     Cli for interacting with Tekton            
 virtctl           v0.42.1     Cli for Kubevirt                           
 ```
