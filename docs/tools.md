@@ -1,14 +1,14 @@
 ```
 NAME              LATEST      DESCRIPTION                                
-argocd            v2.0.3      Declarative continuous deployment          
-arkade            0.7.15      Open Source Kubernetes Marketplace         
+argocd            v2.0.4      Declarative continuous deployment          
+arkade            0.7.20      Open Source Kubernetes Marketplace         
 climan            v0.0.4      Cloud tools cli manager                    
 crc               1.28.0      Local single node Openshift                
-faas-cli          0.13.11     Cli for OpenFaaS                           
-flux              v0.15.0     Cli for Flux                               
+faas-cli          0.13.13     Cli for OpenFaaS                           
+flux              v0.15.3     Cli for Flux                               
 helm              v3.6.1      The Kubernetes Package Manager             
 inletsctl         0.8.4       Create self-hosted exit-servers            
-istioctl          1.10.1      Cli for Istio service mesh                 
+istioctl          1.10.2      Cli for Istio service mesh                 
 k3d               v4.4.6      k3s in Docker                              
 k3sup             0.11.0      Bootstrap Kubernetes with k3s              
 kam               v0.0.34     GitOps Application Manager                 
@@ -17,13 +17,13 @@ kind              v0.11.1     Kubernetes in Docker
 kn                v0.23.1     Knative cli                                
 kubectl           v1.21.2     Kubernetes command line tool               
 kustomize         v4.1.3      Customization of kubernetes configurations 
-linkerd2          edge-21.6.2 Ultralight, security-first service mesh    
+linkerd2          edge-21.6.3 Ultralight, security-first service mesh    
 minikube          v1.21.0     Run Kubernetes locally                     
 odo               v2.2.2      Developer-focused cli for OpenShift        
-oc                4.7.13      Openshift command line interface           
-openshift-install 4.7.13      Openshift installer                        
-plumber           v0.25.3     Cli for messaging systems                  
-pscale            v0.48.0     Cli for PlanetScale Database               
+oc                4.7.16      Openshift command line interface           
+openshift-install 4.7.16      Openshift installer                        
+plumber           v0.29.0     Cli for messaging systems                  
+pscale            v0.50.0     Cli for PlanetScale Database               
 tkn               v0.19.0     Cli for interacting with Tekton            
 virtctl           v0.42.1     Cli for Kubevirt                           
 ```
