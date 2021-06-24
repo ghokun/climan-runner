@@ -39,10 +39,4 @@ jobs:
           python-version: 3.x
       - run: pip install mkdocs-material
       - run: pip install mkdocs-minify-plugin
-      - run: |
-          git branch -D gh-pages
-          git checkout gh-pages
-          git pull --rebase
-          git checkout master
-          mkdocs build --clean
-          mkdocs gh-deploy
+      - run: mkdocs gh-deploy --force
