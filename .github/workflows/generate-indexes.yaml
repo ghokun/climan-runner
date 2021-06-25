@@ -4,9 +4,8 @@ on:
     branches:
       - main
   workflow_dispatch:
-  #schedule:
-  #  - cron: "0 */6 * * *"
-  # Fix it first
+  schedule:
+    - cron: "0 0 * * *"
 jobs:
   generate-indexes:
     runs-on: ubuntu-latest
