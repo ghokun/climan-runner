@@ -17,11 +17,11 @@ kind              v0.11.1     Kubernetes in Docker
 kn                v0.24.0     Knative cli                                
 kubectl           v1.21.2     Kubernetes command line tool               
 kustomize         v4.2.0      Customization of kubernetes configurations 
-linkerd2          edge-21.6.5 Ultralight, security-first service mesh    
+linkerd2          edge-21.7.1 Ultralight, security-first service mesh    
 minikube          v1.21.0     Run Kubernetes locally                     
 odo               v2.2.2      Developer-focused cli for OpenShift        
-oc                4.7.16      Openshift command line interface           
-openshift-install 4.7.16      Openshift installer                        
+oc                4.7.18      Openshift command line interface           
+openshift-install 4.7.18      Openshift installer                        
 plumber           v0.30.0     Cli for messaging systems                  
 pscale            v0.51.0     Cli for PlanetScale Database               
 tkn               v0.19.1     Cli for interacting with Tekton            
