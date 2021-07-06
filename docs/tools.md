@@ -1,7 +1,7 @@
 ```
 NAME              LATEST      DESCRIPTION                                
 argocd            v2.0.4      Declarative continuous deployment          
-arkade            0.7.20      Open Source Kubernetes Marketplace         
+arkade            0.7.21      Open Source Kubernetes Marketplace         
 climan            v0.0.4      Cloud tools cli manager                    
 crc               1.28.0      Local single node Openshift                
 faas-cli          0.13.13     Cli for OpenFaaS                           
@@ -12,7 +12,7 @@ istioctl          1.10.2      Cli for Istio service mesh
 k3d               v4.4.6      k3s in Docker                              
 k3sup             0.11.0      Bootstrap Kubernetes with k3s              
 kam               v0.0.34     GitOps Application Manager                 
-kamel             v1.4.0      Cli for Apacke Camel-K                     
+kamel             v1.4.1      Cli for Apacke Camel-K                     
 kind              v0.11.1     Kubernetes in Docker                       
 kn                v0.24.0     Knative cli                                
 kubectl           v1.21.2     Kubernetes command line tool               
