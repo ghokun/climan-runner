@@ -22,8 +22,8 @@ minikube          v1.21.0     Run Kubernetes locally
 odo               v2.2.2      Developer-focused cli for OpenShift        
 oc                4.7.18      Openshift command line interface           
 openshift-install 4.7.18      Openshift installer                        
-plumber           v0.30.0     Cli for messaging systems                  
-pscale            v0.51.0     Cli for PlanetScale Database               
+plumber           v0.31.0     Cli for messaging systems                  
+pscale            v0.52.0     Cli for PlanetScale Database               
 tkn               v0.19.1     Cli for interacting with Tekton            
 virtctl           v0.42.1     Cli for Kubevirt                           
 ```
