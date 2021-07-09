@@ -5,7 +5,7 @@ arkade            0.7.21      Open Source Kubernetes Marketplace
 climan            v0.0.4      Cloud tools cli manager                    
 crc               1.28.0      Local single node Openshift                
 faas-cli          0.13.13     Cli for OpenFaaS                           
-flux              v0.16.0     Cli for Flux                               
+flux              v0.16.1     Cli for Flux                               
 helm              v3.6.2      The Kubernetes Package Manager             
 inletsctl         0.8.5       Create self-hosted exit-servers            
 istioctl          1.10.2      Cli for Istio service mesh                 
@@ -20,10 +20,10 @@ kustomize         v4.2.0      Customization of kubernetes configurations
 linkerd2          edge-21.7.1 Ultralight, security-first service mesh    
 minikube          v1.22.0     Run Kubernetes locally                     
 odo               v2.2.3      Developer-focused cli for OpenShift        
-oc                4.7.18      Openshift command line interface           
-openshift-install 4.7.18      Openshift installer                        
-plumber           v0.31.0     Cli for messaging systems                  
-pscale            v0.52.0     Cli for PlanetScale Database               
+oc                4.7.19      Openshift command line interface           
+openshift-install 4.7.19      Openshift installer                        
+plumber           v0.32.0     Cli for messaging systems                  
+pscale            v0.53.0     Cli for PlanetScale Database               
 tkn               v0.19.1     Cli for interacting with Tekton            
 virtctl           v0.42.1     Cli for Kubevirt                           
 ```
