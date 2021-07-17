@@ -8,7 +8,7 @@ faas-cli          0.13.13     Cli for OpenFaaS
 flux              v0.16.1     Cli for Flux                               
 helm              v3.6.3      The Kubernetes Package Manager             
 inletsctl         0.8.6       Create self-hosted exit-servers            
-istioctl          1.10.2      Cli for Istio service mesh                 
+istioctl          1.10.3      Cli for Istio service mesh                 
 k3d               v4.4.7      k3s in Docker                              
 k3sup             0.11.0      Bootstrap Kubernetes with k3s              
 kam               v0.0.36     GitOps Application Manager                 
