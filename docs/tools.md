@@ -7,7 +7,7 @@ crc               1.29.1      Local single node Openshift
 faas-cli          0.13.13     Cli for OpenFaaS                           
 flux              v0.16.1     Cli for Flux                               
 helm              v3.6.3      The Kubernetes Package Manager             
-inletsctl         0.8.6       Create self-hosted exit-servers            
+inletsctl         0.8.10      Create self-hosted exit-servers            
 istioctl          1.10.3      Cli for Istio service mesh                 
 k3d               v4.4.7      k3s in Docker                              
 k3sup             0.11.0      Bootstrap Kubernetes with k3s              
@@ -23,7 +23,7 @@ odo               v2.2.3      Developer-focused cli for OpenShift
 oc                4.7.19      Openshift command line interface           
 openshift-install 4.7.19      Openshift installer                        
 plumber           v0.33.0     Cli for messaging systems                  
-pscale            v0.59.0     Cli for PlanetScale Database               
+pscale            v0.60.0     Cli for PlanetScale Database               
 tkn               v0.20.0     Cli for interacting with Tekton            
 virtctl           v0.43.0     Cli for Kubevirt                           
 ```
