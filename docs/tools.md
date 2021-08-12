@@ -14,7 +14,7 @@ k3sup             0.11.0      Bootstrap Kubernetes with k3s
 kam               v0.0.38     GitOps Application Manager                 
 kamel             v1.5.0      Cli for Apacke Camel-K                     
 kind              v0.11.1     Kubernetes in Docker                       
-kn                v0.24.0     Knative cli                                
+kn                v0.25.0     Knative cli                                
 kubectl           v1.22.0     Kubernetes command line tool               
 kustomize         v4.2.0      Customization of kubernetes configurations 
 linkerd2          edge-21.8.1 Ultralight, security-first service mesh    
