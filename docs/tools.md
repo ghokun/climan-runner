@@ -15,15 +15,15 @@ kam               v0.0.38     GitOps Application Manager
 kamel             v1.5.0      Cli for Apacke Camel-K                     
 kind              v0.11.1     Kubernetes in Docker                       
 kn                v0.25.0     Knative cli                                
-kubectl           v1.22.0     Kubernetes command line tool               
+kubectl           v1.22.1     Kubernetes command line tool               
 kustomize         v4.2.0      Customization of kubernetes configurations 
-linkerd2          edge-21.8.2 Ultralight, security-first service mesh    
+linkerd2          edge-21.8.3 Ultralight, security-first service mesh    
 minikube          v1.22.0     Run Kubernetes locally                     
-odo               v2.2.4      Developer-focused cli for OpenShift        
+odo               v2.3.0      Developer-focused cli for OpenShift        
 oc                4.8.4       Openshift command line interface           
 openshift-install 4.8.4       Openshift installer                        
 plumber           v0.34.1     Cli for messaging systems                  
-pscale            v0.67.0     Cli for PlanetScale Database               
+pscale            v0.68.0     Cli for PlanetScale Database               
 tkn               v0.20.0     Cli for interacting with Tekton            
 virtctl           v0.41.3     Cli for Kubevirt                           
 ```
