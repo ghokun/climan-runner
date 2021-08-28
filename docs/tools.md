@@ -1,7 +1,7 @@
 ```
 NAME              LATEST      DESCRIPTION                                
 argocd            v2.1.1      Declarative continuous deployment          
-arkade            0.7.29      Open Source Kubernetes Marketplace         
+arkade            0.8.0       Open Source Kubernetes Marketplace         
 climan            v0.0.4      Cloud tools cli manager                    
 crc               1.30.1      Local single node Openshift                
 faas-cli          0.13.13     Cli for OpenFaaS                           
