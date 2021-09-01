@@ -12,7 +12,7 @@ istioctl          1.9.8       Cli for Istio service mesh
 k3d               v4.4.8      k3s in Docker                              
 k3sup             0.11.0      Bootstrap Kubernetes with k3s              
 kam               v0.0.38     GitOps Application Manager                 
-kamel             v1.5.0      Cli for Apacke Camel-K                     
+kamel             v1.5.1      Cli for Apacke Camel-K                     
 kind              v0.11.1     Kubernetes in Docker                       
 kn                v0.25.0     Knative cli                                
 kubectl           v1.22.1     Kubernetes command line tool               
