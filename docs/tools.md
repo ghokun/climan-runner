@@ -3,12 +3,12 @@ NAME              LATEST      DESCRIPTION
 argocd            v2.1.2      Declarative continuous deployment          
 arkade            0.8.0       Open Source Kubernetes Marketplace         
 climan            v0.0.4      Cloud tools cli manager                    
-crc               1.30.1      Local single node Openshift                
+crc               1.31.2      Local single node Openshift                
 faas-cli          0.13.13     Cli for OpenFaaS                           
 flux              v0.17.0     Cli for Flux                               
 helm              v3.6.3      The Kubernetes Package Manager             
 inletsctl         0.8.14      Create self-hosted exit-servers            
-istioctl          1.9.8       Cli for Istio service mesh                 
+istioctl          1.11.2      Cli for Istio service mesh                 
 k3d               v4.4.8      k3s in Docker                              
 k3sup             0.11.0      Bootstrap Kubernetes with k3s              
 kam               v0.0.38     GitOps Application Manager                 
@@ -17,8 +17,8 @@ kind              v0.11.1     Kubernetes in Docker
 kn                v0.25.0     Knative cli                                
 kubectl           v1.22.1     Kubernetes command line tool               
 kustomize         v4.3.0      Customization of kubernetes configurations 
-linkerd2          edge-21.8.4 Ultralight, security-first service mesh    
-minikube          v1.22.0     Run Kubernetes locally                     
+linkerd2          edge-21.9.1 Ultralight, security-first service mesh    
+minikube          v1.23.0     Run Kubernetes locally                     
 odo               v2.3.0      Developer-focused cli for OpenShift        
 oc                4.8.5       Openshift command line interface           
 openshift-install 4.8.5       Openshift installer                        
