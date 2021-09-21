@@ -5,7 +5,7 @@ arkade            0.8.1       Open Source Kubernetes Marketplace
 climan            v0.0.4      Cloud tools cli manager                    
 crc               1.32.1      Local single node Openshift                
 faas-cli          0.13.13     Cli for OpenFaaS                           
-flux              v0.17.1     Cli for Flux                               
+flux              v0.17.2     Cli for Flux                               
 helm              v3.7.0      The Kubernetes Package Manager             
 inletsctl         0.8.14      Create self-hosted exit-servers            
 istioctl          1.11.2      Cli for Istio service mesh                 
@@ -23,7 +23,7 @@ odo               v2.3.1      Developer-focused cli for OpenShift
 oc                4.8.11      Openshift command line interface           
 openshift-install 4.8.11      Openshift installer                        
 plumber           v0.34.1     Cli for messaging systems                  
-pscale            v0.75.0     Cli for PlanetScale Database               
+pscale            v0.76.0     Cli for PlanetScale Database               
 tkn               v0.20.0     Cli for interacting with Tekton            
 virtctl           v0.45.0     Cli for Kubevirt                           
 ```
