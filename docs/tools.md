@@ -11,7 +11,7 @@ inletsctl         0.8.14      Create self-hosted exit-servers
 istioctl          1.11.3      Cli for Istio service mesh                 
 k3d               v4.4.8      k3s in Docker                              
 k3sup             0.11.0      Bootstrap Kubernetes with k3s              
-kam               v0.0.39     GitOps Application Manager                 
+kam               v0.0.40     GitOps Application Manager                 
 kamel             v1.6.0      Cli for Apacke Camel-K                     
 kind              v0.11.1     Kubernetes in Docker                       
 kn                v0.26.0     Knative cli                                
