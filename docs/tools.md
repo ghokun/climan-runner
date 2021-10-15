@@ -19,10 +19,10 @@ kubectl           v1.22.2      Kubernetes command line tool
 kustomize         v4.4.0       Customization of kubernetes configurations 
 linkerd2          edge-21.10.1 Ultralight, security-first service mesh    
 minikube          v1.23.2      Run Kubernetes locally                     
-odo               v2.3.1       Developer-focused cli for OpenShift        
+odo               v2.4.0       Developer-focused cli for OpenShift        
 oc                4.8.13       Openshift command line interface           
 openshift-install 4.8.13       Openshift installer                        
-plumber           v0.34.2      Cli for messaging systems                  
+plumber           v0.34.3      Cli for messaging systems                  
 pscale            v0.79.0      Cli for PlanetScale Database               
 tkn               v0.21.0      Cli for interacting with Tekton            
 virtctl           v0.46.0      Cli for Kubevirt                           
