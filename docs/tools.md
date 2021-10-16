@@ -8,7 +8,7 @@ faas-cli          0.13.13      Cli for OpenFaaS
 flux              v0.18.3      Cli for Flux                               
 helm              v3.7.1       The Kubernetes Package Manager             
 inletsctl         0.8.14       Create self-hosted exit-servers            
-istioctl          1.9.9        Cli for Istio service mesh                 
+istioctl          1.11.4       Cli for Istio service mesh                 
 k3d               v5.0.1       k3s in Docker                              
 k3sup             0.11.0       Bootstrap Kubernetes with k3s              
 kam               v0.0.40      GitOps Application Manager                 
@@ -17,7 +17,7 @@ kind              v0.11.1      Kubernetes in Docker
 kn                v0.26.0      Knative cli                                
 kubectl           v1.22.2      Kubernetes command line tool               
 kustomize         v4.4.0       Customization of kubernetes configurations 
-linkerd2          edge-21.10.1 Ultralight, security-first service mesh    
+linkerd2          edge-21.10.2 Ultralight, security-first service mesh    
 minikube          v1.23.2      Run Kubernetes locally                     
 odo               v2.4.0       Developer-focused cli for OpenShift        
 oc                4.8.13       Openshift command line interface           
