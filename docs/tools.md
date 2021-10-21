@@ -1,6 +1,6 @@
 ```
 NAME              LATEST       DESCRIPTION                                
-argocd            v2.1.3       Declarative continuous deployment          
+argocd            v2.1.5       Declarative continuous deployment          
 arkade            0.8.5        Open Source Kubernetes Marketplace         
 climan            v0.0.4       Cloud tools cli manager                    
 crc               1.32.1       Local single node Openshift                
@@ -25,5 +25,5 @@ openshift-install 4.9.0        Openshift installer
 plumber           v0.34.3      Cli for messaging systems                  
 pscale            v0.81.0      Cli for PlanetScale Database               
 tkn               v0.21.0      Cli for interacting with Tekton            
-virtctl           v0.46.0      Cli for Kubevirt                           
+virtctl           v0.46.1      Cli for Kubevirt                           
 ```
