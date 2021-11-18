@@ -1,6 +1,6 @@
 ```
 NAME              LATEST       DESCRIPTION                                
-argocd            v2.1.6       Declarative continuous deployment          
+argocd            v2.1.7       Declarative continuous deployment          
 arkade            0.8.9        Open Source Kubernetes Marketplace         
 climan            v0.0.4       Cloud tools cli manager                    
 crc               1.32.1       Local single node Openshift                
@@ -15,13 +15,13 @@ kam               v0.0.40      GitOps Application Manager
 kamel             v1.7.0       Cli for Apacke Camel-K                     
 kind              v0.11.1      Kubernetes in Docker                       
 kn                v0.27.0      Knative cli                                
-kubectl           v1.22.3      Kubernetes command line tool               
+kubectl           v1.22.4      Kubernetes command line tool               
 kustomize         v4.4.1       Customization of kubernetes configurations 
 linkerd2          edge-21.11.2 Ultralight, security-first service mesh    
 minikube          v1.24.0      Run Kubernetes locally                     
 odo               v2.4.1       Developer-focused cli for OpenShift        
-oc                4.9.5        Openshift command line interface           
-openshift-install 4.9.5        Openshift installer                        
+oc                4.9.6        Openshift command line interface           
+openshift-install 4.9.6        Openshift installer                        
 plumber           v0.35.1      Cli for messaging systems                  
 pscale            v0.85.0      Cli for PlanetScale Database               
 tkn               v0.21.0      Cli for interacting with Tekton            
