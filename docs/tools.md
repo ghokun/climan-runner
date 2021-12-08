@@ -9,19 +9,19 @@ flux              v0.24.0      Cli for Flux
 helm              v3.7.1       The Kubernetes Package Manager             
 inletsctl         0.8.14       Create self-hosted exit-servers            
 istioctl          1.10.6       Cli for Istio service mesh                 
-k3d               v5.2.0       k3s in Docker                              
+k3d               v5.2.1       k3s in Docker                              
 k3sup             0.11.0       Bootstrap Kubernetes with k3s              
 kam               v0.0.40      GitOps Application Manager                 
 kamel             v1.7.0       Cli for Apacke Camel-K                     
 kind              v0.11.1      Kubernetes in Docker                       
 kn                v0.27.0      Knative cli                                
-kubectl           v1.22.4      Kubernetes command line tool               
+kubectl           v1.23.0      Kubernetes command line tool               
 kustomize         v4.4.1       Customization of kubernetes configurations 
 linkerd2          edge-21.12.1 Ultralight, security-first service mesh    
 minikube          v1.24.0      Run Kubernetes locally                     
 odo               v2.4.2       Developer-focused cli for OpenShift        
-oc                4.9.8        Openshift command line interface           
-openshift-install 4.9.8        Openshift installer                        
+oc                4.9.9        Openshift command line interface           
+openshift-install 4.9.9        Openshift installer                        
 plumber           v1.0.0       Cli for messaging systems                  
 pscale            v0.86.0      Cli for PlanetScale Database               
 tkn               v0.21.0      Cli for interacting with Tekton            
