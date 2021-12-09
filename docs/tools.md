@@ -6,9 +6,9 @@ climan            v0.0.4       Cloud tools cli manager
 crc               1.32.1       Local single node Openshift                
 faas-cli          0.14.1       Cli for OpenFaaS                           
 flux              v0.24.0      Cli for Flux                               
-helm              v3.7.1       The Kubernetes Package Manager             
+helm              v3.7.2       The Kubernetes Package Manager             
 inletsctl         0.8.14       Create self-hosted exit-servers            
-istioctl          1.10.6       Cli for Istio service mesh                 
+istioctl          1.12.1       Cli for Istio service mesh                 
 k3d               v5.2.1       k3s in Docker                              
 k3sup             0.11.0       Bootstrap Kubernetes with k3s              
 kam               v0.0.40      GitOps Application Manager                 
