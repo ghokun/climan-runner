@@ -3,7 +3,7 @@ NAME              LATEST       DESCRIPTION
 argocd            v2.2.0       Declarative continuous deployment          
 arkade            0.8.11       Open Source Kubernetes Marketplace         
 climan            v0.0.4       Cloud tools cli manager                    
-crc               1.32.1       Local single node Openshift                
+crc               1.37.0       Local single node Openshift                
 faas-cli          0.14.1       Cli for OpenFaaS                           
 flux              v0.24.1      Cli for Flux                               
 helm              v3.7.2       The Kubernetes Package Manager             
@@ -22,8 +22,8 @@ minikube          v1.24.0      Run Kubernetes locally
 odo               v2.4.3       Developer-focused cli for OpenShift        
 oc                4.9.10       Openshift command line interface           
 openshift-install 4.9.10       Openshift installer                        
-plumber           v1.0.2       Cli for messaging systems                  
+plumber           v1.0.3       Cli for messaging systems                  
 pscale            v0.87.0      Cli for PlanetScale Database               
 tkn               v0.21.0      Cli for interacting with Tekton            
-virtctl           v0.48.0      Cli for Kubevirt                           
+virtctl           v0.48.1      Cli for Kubevirt                           
 ```
