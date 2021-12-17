@@ -15,7 +15,7 @@ kam               v0.0.40      GitOps Application Manager
 kamel             v1.7.0       Cli for Apacke Camel-K                     
 kind              v0.11.1      Kubernetes in Docker                       
 kn                v0.28.0      Knative cli                                
-kubectl           v1.23.0      Kubernetes command line tool               
+kubectl           v1.23.1      Kubernetes command line tool               
 kustomize         v4.4.1       Customization of kubernetes configurations 
 linkerd2          edge-21.12.2 Ultralight, security-first service mesh    
 minikube          v1.24.0      Run Kubernetes locally                     
