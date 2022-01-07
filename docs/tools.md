@@ -10,7 +10,7 @@ helm              v3.7.2       The Kubernetes Package Manager
 inletsctl         0.8.14       Create self-hosted exit-servers            
 istioctl          1.12.1       Cli for Istio service mesh                 
 k3d               v5.2.2       k3s in Docker                              
-k3sup             0.11.1       Bootstrap Kubernetes with k3s              
+k3sup             0.11.3       Bootstrap Kubernetes with k3s              
 kam               v0.0.41      GitOps Application Manager                 
 kamel             v1.7.0       Cli for Apacke Camel-K                     
 kind              v0.11.1      Kubernetes in Docker                       
