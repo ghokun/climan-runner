@@ -12,13 +12,13 @@ istioctl          1.12.2      Cli for Istio service mesh
 k3d               v5.2.2      k3s in Docker                              
 k3sup             0.11.3      Bootstrap Kubernetes with k3s              
 kam               v0.0.41     GitOps Application Manager                 
-kamel             v1.8.0      Cli for Apacke Camel-K                     
+kamel             v1.7.0      Cli for Apacke Camel-K                     
 kind              v0.11.1     Kubernetes in Docker                       
 kn                v0.28.0     Knative cli                                
 kubectl           v1.23.2     Kubernetes command line tool               
 kustomize         v4.4.1      Customization of kubernetes configurations 
-linkerd2          edge-22.1.3 Ultralight, security-first service mesh    
-minikube          v1.24.0     Run Kubernetes locally                     
+linkerd2          edge-22.1.4 Ultralight, security-first service mesh    
+minikube          v1.25.0     Run Kubernetes locally                     
 odo               v2.5.0      Developer-focused cli for OpenShift        
 oc                4.9.13      Openshift command line interface           
 openshift-install 4.9.13      Openshift installer                        
