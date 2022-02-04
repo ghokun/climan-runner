@@ -1,6 +1,6 @@
 ```
 NAME              LATEST      DESCRIPTION                                
-argocd            v2.2.3      Declarative continuous deployment          
+argocd            v2.2.4      Declarative continuous deployment          
 arkade            0.8.12      Open Source Kubernetes Marketplace         
 climan            v0.0.4      Cloud tools cli manager                    
 crc               1.39.0      Local single node Openshift                
@@ -9,7 +9,7 @@ flux              v0.26.0     Cli for Flux
 helm              v3.8.0      The Kubernetes Package Manager             
 inletsctl         0.8.16      Create self-hosted exit-servers            
 istioctl          1.12.2      Cli for Istio service mesh                 
-k3d               v5.2.2      k3s in Docker                              
+k3d               v5.3.0      k3s in Docker                              
 k3sup             0.11.3      Bootstrap Kubernetes with k3s              
 kam               v0.0.41     GitOps Application Manager                 
 kamel             v1.8.0      Cli for Apacke Camel-K                     
