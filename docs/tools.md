@@ -16,7 +16,7 @@ kamel             v1.8.0      Cli for Apacke Camel-K
 kind              v0.11.1     Kubernetes in Docker                       
 kn                v0.29.0     Knative cli                                
 kubectl           v1.23.3     Kubernetes command line tool               
-kustomize         v4.5.1      Customization of kubernetes configurations 
+kustomize         v4.5.2      Customization of kubernetes configurations 
 linkerd2          edge-22.2.1 Ultralight, security-first service mesh    
 minikube          v1.25.1     Run Kubernetes locally                     
 odo               v2.5.0      Developer-focused cli for OpenShift        
