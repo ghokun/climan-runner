@@ -5,7 +5,7 @@ arkade            0.8.14      Open Source Kubernetes Marketplace
 climan            v0.0.4      Cloud tools cli manager                    
 crc               1.40.0      Local single node Openshift                
 faas-cli          0.14.2      Cli for OpenFaaS                           
-flux              v0.27.2     Cli for Flux                               
+flux              v0.27.3     Cli for Flux                               
 helm              v3.8.0      The Kubernetes Package Manager             
 inletsctl         0.8.16      Create self-hosted exit-servers            
 istioctl          1.13.1      Cli for Istio service mesh                 
