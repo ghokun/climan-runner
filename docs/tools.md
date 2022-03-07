@@ -1,6 +1,6 @@
 ```
 NAME              LATEST      DESCRIPTION                                
-argocd            v2.2.5      Declarative continuous deployment          
+argocd            v2.3.0      Declarative continuous deployment          
 arkade            0.8.14      Open Source Kubernetes Marketplace         
 climan            v0.0.4      Cloud tools cli manager                    
 crc               1.40.0      Local single node Openshift                
